@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="265c0623-8a3a-45d0-a517-5c93c5300125" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1kXclfwmjTPMeMVuweMbZoK6MPI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="D:\nest\backend\node_modules\prettier" />
+    <property name="ts.external.directory.path" value="D:\nest\backend\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="265c0623-8a3a-45d0-a517-5c93c5300125" name="Default Changelist" comment="" />
+      <created>1605850534912</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605850534912</updated>
+      <workItem from="1605850536334" duration="19247000" />
+      <workItem from="1605880464229" duration="6153000" />
+      <workItem from="1605971809781" duration="18252000" />
+      <workItem from="1605991129314" duration="2221000" />
+      <workItem from="1606039385046" duration="14000" />
+      <workItem from="1606068254572" duration="758000" />
+      <workItem from="1606079863216" duration="9880000" />
+      <workItem from="1606146019173" duration="638000" />
+      <workItem from="1606170526756" duration="2649000" />
+      <workItem from="1606223159111" duration="4618000" />
+      <workItem from="1606227889856" duration="16000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="677" y="324" key="#ESLint" timestamp="1606171761894">
+      <screen x="78" y="0" width="1458" height="864" />
+    </state>
+    <state x="677" y="324" key="#ESLint/78.0.1458.864@78.0.1458.864" timestamp="1606171761894" />
+    <state x="470" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1605869033314">
+      <screen x="78" y="0" width="1458" height="864" />
+    </state>
+    <state x="470" y="181" width="672" height="678" key="search.everywhere.popup/78.0.1458.864@78.0.1458.864" timestamp="1605869033314" />
+  </component>
+</project>
