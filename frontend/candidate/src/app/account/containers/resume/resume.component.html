@@ -1,0 +1,159 @@
+<div class="space-y-6">
+  <div class="bg-white rounded overflow-hidden shadow">
+    <div class="h-56 w-full bg-indigo-500"></div>
+    <div class="p-4">
+      <div class="flex">
+        <div
+          (click)="openAddAvatarModal()"
+          class="-mt-24 w-40 h-40 rounded-full bg-gray-100 shadow cursor-pointer">
+          <img *ngIf="avatar" [src]="avatar" alt="avatar" class="rounded-full"/>
+        </div>
+        <div class="pl-12">
+          <h5 class="font-bold text-2xl">Tran Van Nam</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+    <div class="flex justify-between items-center">
+      <div class="space-y-3">
+        <h3 class="text-xl font-bold">Educations</h3>
+        <p class="text-sm text-gray-700 max-w-lg">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+          in, inventore laborum modi nostrum perspiciatis provident quidem.
+        </p>
+        <button (click)="openAddEducationModal()" class="btn btn-indigo-outline">Add new</button>
+      </div>
+      <svg
+        class="w-24 h-24 text-indigo-500"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+        </path>
+      </svg>
+    </div>
+    <div class="divide-y">
+      <div *ngFor="let education of educations" class="py-6 grid grid-cols-2 gap-x-4 gap-y-2">
+        <div class="col-span-2 space-y-1">
+          <label class="text-sm font-bold">Title *</label>
+          <input type="text" class="focus:outline-none py-2 px-3 w-full border text-sm rounded" [value]="education.title"/>
+        </div>
+        <div class="space-y-1">
+          <label class="text-sm font-bold">Year *</label>
+          <input type="number" class="focus:outline-none py-2 px-3 w-full border text-sm rounded" [value]="education.year" />
+        </div>
+        <div class="space-y-1">
+          <label class="text-sm font-bold">Title *</label>
+          <input type="text" class="focus:outline-none py-2 px-3 w-full border text-sm rounded" [value]="education.institute" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+    <div class="flex justify-between items-center">
+      <div class="space-y-3">
+        <h3 class="text-xl font-bold">Educations</h3>
+        <p class="text-sm text-gray-700 max-w-lg">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+          in, inventore laborum modi nostrum perspiciatis provident quidem.
+        </p>
+        <button class="btn btn-indigo-outline">Add new</button>
+      </div>
+      <svg
+        class="w-24 h-24 text-indigo-500"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+        </path>
+      </svg>
+    </div>
+  </div>
+  <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+    <div class="flex justify-between items-center">
+      <div class="space-y-3">
+        <h3 class="text-xl font-bold">Educations</h3>
+        <p class="text-sm text-gray-700 max-w-lg">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+          in, inventore laborum modi nostrum perspiciatis provident quidem.
+        </p>
+        <button class="btn btn-indigo-outline">Add new</button>
+      </div>
+      <svg
+        class="w-24 h-24 text-indigo-500"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+        </path>
+      </svg>
+    </div>
+  </div>
+  <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+    <div class="flex justify-between items-center">
+      <div class="space-y-3">
+        <h3 class="text-xl font-bold">Educations</h3>
+        <p class="text-sm text-gray-700 max-w-lg">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+          in, inventore laborum modi nostrum perspiciatis provident quidem.
+        </p>
+        <button class="btn btn-indigo-outline">Add new</button>
+      </div>
+      <svg
+        class="w-24 h-24 text-indigo-500"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+        </path>
+      </svg>
+    </div>
+  </div>
+  <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+    <div class="flex justify-between items-center">
+      <div class="space-y-3">
+        <h3 class="text-xl font-bold">Educations</h3>
+        <p class="text-sm text-gray-700 max-w-lg">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+          in, inventore laborum modi nostrum perspiciatis provident quidem.
+        </p>
+        <button class="btn btn-indigo-outline">Add new</button>
+      </div>
+      <svg
+        class="w-24 h-24 text-indigo-500"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+        </path>
+      </svg>
+    </div>
+  </div>
+</div>

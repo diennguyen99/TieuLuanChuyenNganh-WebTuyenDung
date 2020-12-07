@@ -1,0 +1,105 @@
+<div class="bg-white p-6">
+  <h2 class="text-2xl font-medium text-indigo-500 border-b pb-3">My Profile</h2>
+  <div class="py-6">
+    <form *ngIf="form" (ngSubmit)="onSubmit()" [formGroup]="form">
+      <app-input
+        [control]="form.get('name')"
+        label="Name"
+        inputType="text">
+      </app-input>
+      <div class="grid grid-cols-2 gap-6 mb-3">
+        <div class="space-y-1 mb-3">
+          <label class="text-sm font-bold">Sex</label>
+          <ng-select
+            formControlName="sex"
+            appearance="outline"
+            [searchable]="false"
+            [clearable]="false"
+            placeholder="Job Type"
+            class="rounded-sm border w-full"
+          >
+            <ng-option value="Male">
+              Male
+            </ng-option>
+            <ng-option value="Female">
+              Female
+            </ng-option>
+          </ng-select>
+        </div>
+        <div class="mb-3 space-y-1">
+          <label class="text-sm font-bold">Email</label>
+          <input
+            disabled
+            type="text"
+            [value]="profile.email"
+            autofocus
+            class="w-full focus:outline-none py-3 px-4 border rounded-sm text-xs"
+          />
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-6 mb-3">
+        <div class="space-y-1 mb-3">
+          <label class="text-sm font-bold">Job Type</label>
+          <ng-select
+            formControlName="jobTypeSlug"
+            appearance="outline"
+            [searchable]="false"
+            [clearable]="false"
+            placeholder="Job Type"
+            class="rounded-sm border w-full"
+          >
+            <ng-option *ngFor="let jobType of jobTypes" [value]="jobType.slug">
+              {{ jobType.name }}
+            </ng-option>
+          </ng-select>
+        </div>
+        <div class="space-y-1 mb-3">
+          <label class="text-sm font-bold">Job Sector</label>
+          <ng-select
+            formControlName="jobSectorSlug"
+            appearance="outline"
+            [searchable]="false"
+            [clearable]="false"
+            placeholder="Job Sector"
+            class="rounded-sm border w-full"
+          >
+            <ng-option *ngFor="let jobSector of jobSectors" [value]="jobSector.slug">
+              {{ jobSector.name }}
+            </ng-option>
+          </ng-select>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-6 mb-3">
+        <app-input
+          [control]="form.get('birthDay')"
+          label="Birth Day"
+          inputType="date">
+        </app-input>
+        <app-input
+          [control]="form.get('phone')"
+          label="Phone"
+          inputType="text">
+        </app-input>
+      </div>
+      <app-input
+        [control]="form.get('address')"
+        label="Address"
+        inputType="text">
+      </app-input>
+      <div class="space-y-1 mb-3">
+        <label class="text-sm font-bold">Description</label>
+        <textarea
+          formControlName="description"
+          rows="4"
+          placeholder="Description"
+          class="focus:outline-none py-3 px-4 w-full border text-xs rounded-sm">
+        </textarea>
+      </div>
+      <button
+        type="submit"
+        class="mt-4 btn btn-indigo">
+        Save
+      </button>
+    </form>
+  </div>
+</div>

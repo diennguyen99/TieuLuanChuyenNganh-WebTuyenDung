@@ -1,0 +1,27 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div class="space-y-1 mb-4">
+    <label class="text-sm font-bold">Title *</label>
+    <input
+      formControlName="title"
+      type="text"
+      placeholder="Title"
+      class="focus:outline-none py-2 px-3 w-full border text-sm rounded-sm"/>
+  </div>
+  <div class="space-y-1 mb-4">
+    <label class="text-sm font-bold">Year *</label>
+    <input
+      formControlName="year"
+      type="number"
+      placeholder="Year"
+      class="focus:outline-none py-2 px-3 w-full border text-sm rounded-sm"/>
+  </div>
+  <div class="space-y-1 mb-4">
+    <label class="text-sm font-bold">Institute *</label>
+    <input
+      formControlName="institute"
+      type="text"
+      placeholder="Institute"
+      class="focus:outline-none py-2 px-3 w-full border text-sm rounded-sm"/>
+  </div>
+  <button type="submit" class="mt-4 btn btn-indigo">Submit</button>
+</form>
