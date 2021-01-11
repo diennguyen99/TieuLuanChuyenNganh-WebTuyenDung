@@ -1,0 +1,31 @@
+query appliedJobs($input: AppliedJobsInput!) {
+  getAppliedJobs (input: $input) {
+    ok
+    error
+    totalPages
+    totalResults
+    appliedJobs {
+      job {
+        name
+        slug
+        company {
+          name
+          logo
+        }
+        city {
+          name
+        }
+        jobSector {
+          name
+        }
+        jobPosition {
+          name
+        }
+        jobType {
+          name
+        }
+        updatedAt
+      }
+    }
+  }
+}

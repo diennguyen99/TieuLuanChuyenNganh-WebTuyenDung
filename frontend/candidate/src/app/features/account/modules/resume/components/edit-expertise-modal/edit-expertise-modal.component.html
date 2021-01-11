@@ -1,0 +1,28 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <app-input
+    [control]="form.get('label')"
+    label="Label"
+    placeholder="Label"
+  ></app-input>
+  <app-input
+    [control]="form.get('percentage')"
+    label="Percentage"
+    placeholder="Percentage 1 -> 100"
+    inputType="number"
+  ></app-input>
+  <div class="mt-4 flex justify-between">
+    <app-button
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Save
+    </app-button>
+    <app-button
+      *ngIf="index !== null"
+      (click)="onDelete()"
+      color="danger"
+    >
+      Delete
+    </app-button>
+  </div>
+</form>

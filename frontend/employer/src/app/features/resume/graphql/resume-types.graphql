@@ -1,0 +1,60 @@
+query resumesOpenNew {
+  resumesOpenNew {
+    error
+    ok
+    resumesOpen {
+      resumeStatus
+      createdAt
+      user {
+        name
+        jobType {
+          name
+        }
+        jobSector {
+          name
+        }
+      }
+      resume {
+        id
+        avatar
+      }
+    }
+  }
+}
+
+query candidateApply($input: AppliedJobsInput!) {
+  getCandidatesApply(input: $input){
+    ok
+    error
+    totalPages
+    totalResults
+    appliedJobs {
+      id
+      name
+      email
+      content
+      cvOnline {
+        id
+      }
+      cvUpload
+      job {
+        name
+      }
+    }
+  }
+}
+
+query resumeTypes {
+  resumeTypes(input: {
+    page: 1
+  }) {
+    ok
+    error
+    totalPages
+    totalResults
+    resumeTypes {
+      id
+      name
+    }
+  }
+}

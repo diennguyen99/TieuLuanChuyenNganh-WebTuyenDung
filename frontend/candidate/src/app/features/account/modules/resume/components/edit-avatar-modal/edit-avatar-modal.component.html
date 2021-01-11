@@ -1,0 +1,13 @@
+<input type="file" (change)="fileChangeEvent($event)" />
+
+<image-cropper
+  [imageChangedEvent]="imageChangedEvent"
+  [maintainAspectRatio]="true"
+  format="png"
+  (imageCropped)="imageCropped($event)"
+></image-cropper>
+<div *ngIf="croppedImage !== ''" class="flex justify-end">
+  <app-button (click)="onSubmit()">
+    Upload Avatar
+  </app-button>
+</div>

@@ -1,0 +1,79 @@
+<div style="background-image: url('./assets/banner-bg.jpg')"
+     class="h-screen bg-cover relative flex items-center justify-center">
+  <div class="banner-overlay bg-black opacity-75 absolute inset-0"></div>
+  <div class="z-20">
+    <h2 class="text-5xl font-light text-white text-center">
+      Aim Higher. Reach Farther. Dream Bigger.
+    </h2>
+    <p class="text-lg text-white font-light text-center">
+      A better career is out there. We'll help you find it to use.
+    </p>
+    <form [formGroup]="form" class="mt-8 bg-white">
+      <ul class="flex">
+        <li class="p-4 border-r">
+          <label>
+            <input
+              formControlName="name"
+              type="text"
+              placeholder="Job Title, Keywords, or Company"
+              class="focus:outline-none text-xs w-64"
+            />
+          </label>
+        </li>
+        <li class="py-2 border-r">
+          <ng-container *ngIf="cityVm$ | async as cityVm">
+            <ng-select
+              formControlName="city"
+              appearance="outline"
+              [searchable]="false"
+              [clearable]="false"
+              placeholder="City"
+              class="w-64"
+            >
+              <ng-option *ngFor="let city of cityVm.cities" [value]="city.slug" >
+                {{ city.name }}
+              </ng-option>
+            </ng-select>
+          </ng-container>
+        </li>
+        <li class="py-2">
+          <ng-container *ngIf="jobSectorVm$ | async as jobSectorVm">
+            <ng-select
+              formControlName="jobSector"
+              appearance="outline"
+              [searchable]="false"
+              [clearable]="false"
+              placeholder="Job Sector"
+              class="w-64"
+            >
+              <ng-option *ngFor="let jobSector of jobSectorVm.jobSectors" [value]="jobSector.slug">
+                {{ jobSector.name }}
+              </ng-option>
+            </ng-select>
+          </ng-container>
+        </li>
+        <li>
+          <button
+            (click)="onSubmit()"
+            class="focus:outline-none h-full px-6 bg-indigo-400 hover:bg-indigo-400"
+          >
+            <svg
+              class="w-6 h-6 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>

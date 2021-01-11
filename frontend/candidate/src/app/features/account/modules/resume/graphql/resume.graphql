@@ -1,0 +1,87 @@
+query resume {
+  getResume {
+    avatar
+    user {
+      name
+    }
+    educations {
+      title
+      year
+      institute
+    }
+    experiences {
+      title
+      company
+      fromDate
+      toDate
+      present
+    }
+    portfolios {
+      title
+      image
+      url
+    }
+    expertises {
+      label
+      percentage
+    }
+    languages {
+      label
+      percentage
+    }
+    awards {
+      title
+      year
+      description
+    }
+  }
+}
+
+mutation editAvatar($input: EditAvatarInput!) {
+  editAvatar(input: $input) {
+    ok
+    error
+  }
+}
+
+mutation editEducation($educations: [CreateEducationInput!]!) {
+  editEducation(input: { educations: $educations }) {
+    ok
+    error
+  }
+}
+
+mutation editExperience($experiences: [CreateExperienceInput!]!) {
+  editExperience(input: { experiences: $experiences }) {
+    ok
+    error
+  }
+}
+
+mutation editPortfolio($portfolios: [CreatePortfolioInput!]!) {
+  editPortfolio(input: { portfolios: $portfolios }) {
+    ok
+    error
+  }
+}
+
+mutation editExpertise($expertises: [CreateExpertiseInput!]!) {
+  editExpertise(input: { expertises: $expertises }) {
+    ok
+    error
+  }
+}
+
+mutation editLanguage($languages: [CreateLanguageInput!]!) {
+  editLanguage(input: { languages: $languages }) {
+    ok
+    error
+  }
+}
+
+mutation editAward($awards: [CreateAwardInput!]!) {
+  editAward(input: { awards: $awards }) {
+    ok
+    error
+  }
+}

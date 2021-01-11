@@ -1,0 +1,48 @@
+query company {
+  companyByEmployer {
+    ok
+    error
+    company {
+      id
+      name
+      phone
+      logo
+      thumbnail
+      description
+      city {
+        name
+        slug
+      }
+      website
+      facebook
+      address
+      foundedYear
+      companySize
+      averageAge
+      point
+    }
+  }
+}
+
+mutation editCompany($input: EditCompanyInput!) {
+  editCompany(input: $input) {
+    ok
+    error
+  }
+}
+
+mutation editLogoCompany($input: EditLogoInput!) {
+  editLogoCompany(input: $input) {
+    ok
+    error
+    url
+  }
+}
+
+mutation editThumbnailCompany($input: EditThumbnailInput!) {
+  editThumbnailCompany(input: $input) {
+    ok
+    error
+    url
+  }
+}

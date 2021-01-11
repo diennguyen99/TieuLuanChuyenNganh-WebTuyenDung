@@ -1,0 +1,19 @@
+.input-container {
+  @apply mb-3 block space-y-1;
+
+  span {
+    @apply text-sm font-bold text-gray-900;
+
+    span {
+      @apply text-red-500;
+    }
+  }
+
+  input {
+    @apply py-2 px-3 w-full rounded-sm border text-sm;
+
+    &:focus {
+      @apply outline-none ring-1 border-indigo-300;
+    }
+  }
+}

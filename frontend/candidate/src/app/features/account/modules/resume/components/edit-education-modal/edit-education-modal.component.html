@@ -1,0 +1,33 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <app-input
+    [control]="form.get('institute')"
+    label="Institute"
+    placeholder="Institute"
+  ></app-input>
+  <app-input
+    [control]="form.get('title')"
+    label="Title"
+    placeholder="Title"
+  ></app-input>
+  <app-input
+    [control]="form.get('year')"
+    label="Year"
+    placeholder="Year"
+    inputType="number"
+  ></app-input>
+  <div class="mt-6 flex justify-between">
+    <app-button
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Save
+    </app-button>
+    <app-button
+      *ngIf="index !== null"
+      (click)="onDelete()"
+      color="danger"
+    >
+      Delete
+    </app-button>
+  </div>
+</form>

@@ -1,0 +1,6 @@
+mutation applyJob($input: UploadCvInput!) {
+  uploadCv (input: $input) {
+    ok
+    error
+  }
+}

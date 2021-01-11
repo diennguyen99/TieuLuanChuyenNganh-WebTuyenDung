@@ -1,11 +1,12 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { BaseOutput } from '../../common/dtos/output.dto';
+import { CreateMySkillInput } from './create-resume.dto';
 
 @InputType()
-export class EditSkillInput {
-  @Field((type) => [String])
-  skills: string[];
+export class EditMySkillInput {
+  @Field((type) => [CreateMySkillInput])
+  skills: CreateMySkillInput[];
 }
 
 @ObjectType()
-export class EditSkillOutput extends BaseOutput {}
+export class EditMySkillOutput extends BaseOutput {}

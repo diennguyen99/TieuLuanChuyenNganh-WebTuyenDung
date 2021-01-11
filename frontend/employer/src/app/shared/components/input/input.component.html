@@ -1,0 +1,43 @@
+<div class="mb-3 space-y-1">
+  <label class="text-sm font-bold">
+    {{ label }}
+    <span *ngIf="required" class="text-red-500" >*</span>
+  </label>
+  <input
+    [formControl]="control"
+    [type]="inputType"
+    [placeholder]="label"
+    class="w-full focus:outline-none py-3 px-4 border rounded-sm text-xs"
+  />
+  <div *ngIf="showErrors()" class="text-xs text-red-500">
+    <p *ngIf="control.errors.required">
+      Value is required
+    </p>
+    <p *ngIf="control.errors.email">
+      Must be email
+    </p>
+    <p *ngIf="control.errors.minlength" class="text-xs text-red-500">
+      Value you entered is
+      {{ control.errors.minlength.actualLength }}
+      characters long, but it must be at aleast
+      {{ control.errors.minlength.requiredLength }}
+      characters
+    </p>
+    <p *ngIf="control.errors.maxlength" class="text-xs text-red-500">
+      Value you entered is
+      {{ control.errors.maxlength.actualLength }}
+      characters long, but it cannot be longer than
+      {{ control.errors.maxlength.requiredLength }}
+      characters
+    </p>
+    <p *ngIf="control.errors.min">
+      {{ label }} must be at aleast {{ control.errors.min.min | currency }}
+    </p>
+    <p *ngIf="control.errors.max">
+      {{ label }} cannot be longer than {{ control.errors.max.max | currency }}
+    </p>
+    <p *ngIf="control.errors.pattern" class="text-xs text-red-500">
+      Invalid format
+    </p>
+  </div>
+</div>

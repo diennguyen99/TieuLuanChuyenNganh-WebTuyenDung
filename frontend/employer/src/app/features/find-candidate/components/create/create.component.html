@@ -1,0 +1,99 @@
+<form *ngIf="form" [formGroup]="form">
+  <app-input label="Campaign name"
+             [control]="form.get('name')">
+  </app-input>
+  <div class="mt-4 space-y-1">
+    <label class="text-sm font-bold">
+      Job position
+      <span class="text-xs text-red-500">*</span>
+    </label>
+    <ng-select
+      formControlName="jobPositionSlug"
+      appearance="outline"
+      [searchable]="false"
+      [clearable]="false"
+      placeholder="Select job type">
+      <ng-option *ngFor="let jobPosition of jobPositions"
+                 [value]="jobPosition.slug">
+        {{ jobPosition.name }}
+      </ng-option>
+    </ng-select>
+  </div>
+  <div class="mt-4 space-y-1">
+    <label class="text-sm font-bold">
+      <span class="text-xs text-red-500">*</span>
+      Job type
+    </label>
+    <ng-select
+      formControlName="jobTypeSlug"
+      appearance="outline"
+      [searchable]="false"
+      [clearable]="false"
+      placeholder="Select job type">
+      <ng-option *ngFor="let jobType of jobTypes"
+                 [value]="jobType.slug">
+        {{ jobType.name }}
+      </ng-option>
+    </ng-select>
+  </div>
+  <div class="mt-4 space-y-1">
+    <label class="text-sm font-bold">
+      Job sector
+      <span class="text-xs text-red-500">*</span>
+    </label>
+    <ng-select
+      formControlName="jobSectorSlug"
+      appearance="outline"
+      [searchable]="false"
+      [clearable]="false"
+      placeholder="Select job sector">
+      <ng-option *ngFor="let jobSector of jobSectors"
+                 [value]="jobSector.slug">
+        {{ jobSector.name }}
+      </ng-option>
+    </ng-select>
+  </div>
+  <div class="mt-4 space-y-1">
+    <label class="text-sm font-bold">
+      Location
+      <span class="text-xs text-red-500">*</span>
+    </label>
+    <ng-select
+      formControlName="citySlug"
+      appearance="outline"
+      [searchable]="false"
+      [clearable]="false"
+      placeholder="Select location">
+      <ng-option *ngFor="let city of cities"
+                 [value]="city.slug">
+        {{ city.name }}
+      </ng-option>
+    </ng-select>
+  </div>
+  <div class="mt-4 space-y-1">
+    <label class="text-sm font-bold">Skills</label>
+    <ng-select
+      formControlName="skills"
+      placeholder="Skills"
+      [items]="[]"
+      [addTag]="true"
+      [multiple]="true"
+      [selectOnTab]="true"
+      [isOpen]="false">
+    </ng-select>
+  </div>
+  <div class="mt-8 flex justify-between">
+    <button
+      (click)="closeModal()"
+      class="focus:outline-none py-2 px-6 rounded text-white bg-gray-600 border border-gray-600 hover:text-gray-600 hover:bg-white">
+      Cancel
+    </button>
+    <button
+      [disabled]="this.form.invalid"
+      (click)="onSubmit()"
+      type="submit"
+      class="focus:outline-none py-2 px-6 rounded text-white bg-indigo-500 border border-indigo-500 hover:text-indigo-500 hover:bg-white">
+      {{ !searchCampaign ? 'Create a campaign' : 'Edit campaign' }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,166 @@
+<div *ngIf="searchCampaign" class="rounded bg-white shadow">
+  <div class="px-8 py-8">
+    <div class="flex justify-between">
+      <h2 class="text-xl font-bold">{{ searchCampaign.name }}
+        <span class="text-base font-light text-gray-600">#{{ this.id }}</span>
+      </h2>
+      <div class="space-y-3">
+        <a routerLink="/find-candidates"
+           class="focus:outline-none py-2 px-6 flex items-center text-white border border-gray-600 bg-gray-600 hover:text-gray-600 hover:bg-white">
+          Back Choose another campaign
+          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+        </a>
+      </div>
+    </div>
+    <hr class="my-5" />
+    <div class="mt-8">
+      <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-9">
+          <div class="space-y-1">
+            <label class="text-sm font-bold">Skills</label>
+            <div class="border py-2 px-3 bg-gray-200 space-x-2">
+              <span *ngFor="let skill of searchCampaign.skills"
+                    class="border py-1 px-2 bg-white">
+                {{ skill }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-3">
+          <div class="space-y-1">
+            <label class="text-sm font-bold">Location</label>
+            <input disabled
+                   type="text"
+                   [value]="searchCampaign.city.name"
+                   class="block w-full py-2 px-3 border"/>
+          </div>
+        </div>
+      </div>
+      <hr class="my-5" />
+      <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-5">
+          <div class="space-y-1">
+            <label class="text-sm font-bold">Job position</label>
+            <input disabled
+                   type="text"
+                   [value]="searchCampaign.jobPosition.name"
+                   class="block w-full py-2 px-3 border"/>
+          </div>
+        </div>
+        <div class="col-span-4">
+          <div class="space-y-1">
+            <label class="text-sm font-bold">Job type</label>
+            <input disabled
+                   type="text"
+                   [value]="searchCampaign.jobType.name"
+                   class="block w-full py-2 px-3 border"/>
+          </div>
+        </div>
+        <div class="col-span-3">
+          <div class="space-y-1">
+            <label class="text-sm font-bold">Job sector</label>
+            <input disabled
+                   type="text"
+                   [value]="searchCampaign.jobSector.name"
+                   class="block w-full py-2 px-3 border"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-12">
+  <div class="col-span-4">
+    <div class="pt-6 bg-white rounded shadow">
+      <div class="px-5 pb-2 border-b">
+        <h3 class="font-bold text-2xl">Candidate List</h3>
+        <p class="text-xs">
+          <span class="font-medium">1 - 12</span> of
+          <span class="font-medium">50</span> candidates</p>
+      </div>
+      <ul>
+        <li *ngFor="let resume of resumes"
+            class="py-4 px-5 border-b">
+          <div class="flex">
+            <figure>
+              <button class="focus:outline-none">
+                <img
+                  src="https://ui-avatars.com/api/?size=256"
+                  alt="avatar"
+                  class="rounded-full w-24">
+              </button>
+            </figure>
+            <div class="ml-4">
+              <div class="flex justify-between">
+                <button (click)="openModalViewCV(resume.id)"
+                        class="focus:outline-none text-xl font-medium">
+                  {{ resume.user.name }}
+                </button>
+                <span class="text-xs text-gray-600 flex items-center">
+                  <svg
+                    class="w-5 h-5 mr-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
+                  </svg>
+                  Updated {{ resume.user.updatedAt | timeAgo }}
+                </span>
+              </div>
+              <h5 class="text-xs"><span class="underline">Apply position:</span> Front-end dev</h5>
+              <div class="mt-2 py-1 px-2 w-40 text-xs border border-dashed rounded-lg flex items-center">
+                <svg
+                  class="w-4 h-4 mr-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                  </path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z">
+                  </path>
+                </svg>
+                Location: {{ resume.user.city.name }}
+              </div>
+              <div class="mt-2 py-1 px-2 w-3/4 text-xs border border-dashed rounded-lg">
+                <svg
+                  class="w-4 h-4 mr-1 inline-block"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                  </path>
+                </svg>
+                {{ resume.user.description }}
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-4 float-right">
+    <nz-pagination [(nzPageIndex)]="currentPage"
+                   [nzPageSize]="totalItemPerPage"
+                   [nzTotal]="totalResults">
+    </nz-pagination>
+  </div>
+</div>

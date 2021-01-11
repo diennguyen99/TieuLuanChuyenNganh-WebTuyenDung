@@ -1,0 +1,83 @@
+<form *ngIf="form" [formGroup]="form">
+  <app-input label="Name"
+             [control]="form.get('name')">
+  </app-input>
+  <app-input label="Phone"
+             [control]="form.get('phone')">
+  </app-input>
+  <div class="grid grid-cols-2 gap-6">
+    <app-input label="Website"
+               [required]="false"
+               [control]="form.get('website')">
+    </app-input>
+    <app-input label="Facebook"
+               [required]="false"
+               [control]="form.get('facebook')">
+    </app-input>
+  </div>
+  <div class="grid grid-cols-3 gap-4">
+    <app-input label="Founded Year"
+               inputType="number"
+               [control]="form.get('foundedYear')">
+    </app-input>
+    <app-input label="Company Size"
+               inputType="number"
+               [control]="form.get('companySize')">
+    </app-input>
+    <app-input label="Average Age"
+               inputType="number"
+               [control]="form.get('averageAge')">
+    </app-input>
+  </div>
+  <div class="mb-3 grid grid-cols-2">
+    <div class="space-y-1">
+      <label class="font-bold text-sm">
+        City
+        <span class="text-red-500">*</span>
+      </label>
+      <ng-container *ngIf="vm$ | async as vm">
+        <ng-select
+          formControlName="citySlug"
+          appearance="outline"
+          [searchable]="false"
+          [clearable]="false"
+          placeholder="Select city">
+          <ng-option
+            *ngFor="let city of vm.cities"
+            [value]="city.slug">
+            {{ city.name }}
+          </ng-option>
+        </ng-select>
+      </ng-container>
+    </div>
+  </div>
+  <app-input label="Address"
+             [control]="form.get('address')">
+  </app-input>
+  <div class="mb-3">
+    <label class="text-sm font-bold">
+      Description
+      <span class="text-red-500">*</span>
+    </label>
+    <div class="mt-1">
+      <quill-editor
+        formControlName="description"
+        class="content-editor"
+        [styles]="{'min-height': '120px', height: '200px'}"
+        [placeholder]="''">
+      </quill-editor>
+    </div>
+  </div>
+
+  <div class="flex justify-between">
+    <button (click)="closeModal()"
+            class="focus:outline-none py-2 px-6 text-gray-700 border border-gray-700 bg-gray-300">
+      Cancel
+    </button>
+    <button [disabled]="this.form.invalid"
+            (click)="onSubmit()"
+            class="focus:outline-none py-2 px-6 text-white border border-indigo-500 bg-indigo-500 hover:bg-white hover:text-indigo-500">
+      Save
+    </button>
+  </div>
+</form>

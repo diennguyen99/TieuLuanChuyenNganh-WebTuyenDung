@@ -1,11 +1,14 @@
-import { InputType, ObjectType, PartialType, PickType } from '@nestjs/graphql';
-import { User } from '../entities/user.entity';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { BaseOutput } from '../../common/dtos/output.dto';
 
 @InputType()
-export class ChangePasswordInput extends PartialType(
-  PickType(User, ['password']),
-) {}
+export class ChangePasswordInput {
+  @Field((type) => String)
+  oldPassword: string;
+
+  @Field((type) => String)
+  newPassword: string;
+}
 
 @ObjectType()
 export class ChangePasswordOutput extends BaseOutput {}

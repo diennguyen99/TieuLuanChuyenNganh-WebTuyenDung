@@ -1,0 +1,135 @@
+<form
+  *ngIf="form"
+  [formGroup]="form">
+  <app-input
+    [control]="form.get('name')"
+    label="Title"
+    inputType="text">
+  </app-input>
+  <div class="mb-3 grid grid-cols-2 gap-6">
+    <div class="space-y-1">
+      <label class="font-bold text-sm">Job type</label>
+      <ng-select
+        formControlName="jobTypeSlug"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select job type">
+        <ng-option
+          *ngFor="let jobType of jobTypes"
+          [value]="jobType.slug">
+          {{ jobType.name }}
+        </ng-option>
+      </ng-select>
+    </div>
+    <div class="space-y-1">
+      <label class="font-bold text-sm">Job sector</label>
+      <ng-select
+        formControlName="jobSectorSlug"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select job sector">
+        <ng-option
+          *ngFor="let jobSector of jobSectors"
+          [value]="jobSector.slug">
+          {{ jobSector.name }}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+  <div class="grid grid-cols-3 gap-6">
+    <div class="mb-3 space-y-1">
+      <label class="font-bold text-sm">Salary Type</label>
+      <ng-select
+        formControlName="salaryType"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select city">
+        <ng-option value="Monthly">
+          Monthly
+        </ng-option>
+        <ng-option value="Weekly">
+          Weekly
+        </ng-option>
+        <ng-option value="Hourly">
+          Hourly
+        </ng-option>
+        <ng-option value="Negotiable">
+          Negotiable
+        </ng-option>
+      </ng-select>
+    </div>
+    <app-input
+      *ngIf="form.get('salaryType').value !== 'Negotiable'"
+      [control]="form.get('salaryMin')"
+      label="Salary Min"
+      inputType="number">
+    </app-input>
+    <app-input
+      *ngIf="form.get('salaryType').value !== 'Negotiable'"
+      [control]="form.get('salaryMax')"
+      label="Salary Max"
+      inputType="number">
+    </app-input>
+  </div>
+  <div class="mb-3 grid grid-cols-2 gap-6">
+    <div class="space-y-1">
+      <label class="font-bold text-sm">City</label>
+      <ng-select
+        formControlName="citySlug"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select city">
+        <ng-option
+          *ngFor="let city of cities"
+          [value]="city.slug">
+          {{ city.name }}
+        </ng-option>
+      </ng-select>
+    </div>
+    <div class="space-y-1">
+      <label class="font-bold text-sm">Job position</label>
+      <ng-select
+        formControlName="jobPositionSlug"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select job position">
+        <ng-option
+          *ngFor="let jobPosition of jobPositions"
+          [value]="jobPosition.slug">
+          {{ jobPosition.name }}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+  <app-input
+    [control]="form.get('address')"
+    label="Address"
+    inputType="text">
+  </app-input>
+  <div class="mb-3">
+    <label class="text-sm font-bold">Description</label>
+    <div class="mt-1">
+      <quill-editor
+        formControlName="description"
+        class="content-editor"
+        [styles]="{'min-height': '120px', height: '200px'}"
+        [placeholder]="''">
+      </quill-editor>
+    </div>
+  </div>
+  <div class="flex justify-between">
+    <button (click)="onCloseModal()"
+            class="focus:outline-none py-2 px-6 text-gray-700 border bg-gray-300">
+      Cancel
+    </button>
+    <button (click)="onSubmit()"
+            class="focus:outline-none py-2 px-6 text-white border border-indigo-500 bg-indigo-500 hover:bg-white hover:text-indigo-500">
+      Save
+    </button>
+  </div>
+</form>

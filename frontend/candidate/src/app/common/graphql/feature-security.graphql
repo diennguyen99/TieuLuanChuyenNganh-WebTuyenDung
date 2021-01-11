@@ -1,0 +1,14 @@
+mutation LoginMutation($input: LoginInput!) {
+  login(input: $input) {
+    ok
+    error
+    token
+  }
+}
+
+mutation createAccount($input: CreateAccountInput!) {
+  createAccount(input: $input) {
+    ok
+    error
+  }
+}

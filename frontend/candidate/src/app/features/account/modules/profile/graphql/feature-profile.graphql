@@ -1,0 +1,30 @@
+query profile {
+  me {
+    email
+    name
+    phone
+    sex
+    birthDay
+    address
+    description
+    jobPosition {
+      slug
+    }
+    city {
+      slug
+    }
+    jobType {
+      slug
+    }
+    jobSector {
+      slug
+    }
+  }
+}
+
+mutation editProfile($input: EditProfileInput!) {
+  editProfile(input: $input) {
+    ok
+    error
+  }
+}

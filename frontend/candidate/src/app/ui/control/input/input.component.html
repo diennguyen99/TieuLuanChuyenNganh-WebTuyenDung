@@ -1,0 +1,10 @@
+<div class="mb-3">
+  <label [ngClass]="['input-container']">
+    <span>{{ label }} <span *ngIf="required">*</span></span>
+    <input
+      [type]="inputType"
+      [formControl]="control"
+      [placeholder]="placeholder"
+    />
+  </label>
+</div>

@@ -1,0 +1,56 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <app-input
+    [control]="form.get('company')"
+    label="Company"
+    placeholder="Company"
+  ></app-input>
+  <div class="grid grid-cols-5 gap-6">
+    <div class="col-span-1">
+      <label class="space-y-2">
+        <span class="mb-2 text-sm font-highlight">Present</span>
+        <br />
+        <input class="w-6 h-6" formControlName="present" type="checkbox" />
+      </label>
+    </div>
+    <div
+      *ngIf="!form.get('present').value"
+      class="col-span-2">
+      <app-input
+        [control]="form.get('fromDate')"
+        label="From Date"
+        placeholder="From Date"
+        inputType="date"
+      ></app-input>
+    </div>
+    <div
+      *ngIf="!form.get('present').value"
+      class="col-span-2">
+      <app-input
+        [control]="form.get('toDate')"
+        label="To Date"
+        placeholder="To Date"
+        inputType="date"
+      ></app-input>
+    </div>
+  </div>
+  <app-input
+    [control]="form.get('title')"
+    label="Title"
+    placeholder="Title"
+  ></app-input>
+  <div class="mt-4 flex justify-between">
+    <app-button
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Save
+    </app-button>
+    <app-button
+      *ngIf="index !== null"
+      (click)="onDelete()"
+      color="danger"
+    >
+      Delete
+    </app-button>
+  </div>
+</form>

@@ -1,6 +1,6 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
 import { CloudinaryModuleOptions } from './cloudinary.interfaces';
-import { CONFIG_OPTIONS } from './cloudinary.constants';
+import { CONFIG_OPTIONS } from '../common/common.constants';
 import { CloudinaryService } from './cloudinary.service';
 
 @Module({})

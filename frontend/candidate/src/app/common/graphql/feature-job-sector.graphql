@@ -1,0 +1,10 @@
+query jobSectorsQuery {
+  jobSectors {
+    ok
+    error
+    results {
+      name
+      slug
+    }
+  }
+}

@@ -1,11 +1,12 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, ManyToOne, RelationId } from 'typeorm';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, RelationId } from 'typeorm';
 
 import { BaseEntity } from '../../common/entities/base.entity';
 import { User } from '../../users/entities/user.entity';
+import { ResumeOpen } from './resume-open.entity';
 
 @ObjectType()
-class Education {
+export class Education {
   @Field((type) => String)
   title: string;
 
@@ -17,15 +18,24 @@ class Education {
 }
 
 @ObjectType()
+class MySkill {
+  @Field((type) => String)
+  name: string;
+
+  @Field((type) => Number)
+  percentage: number;
+}
+
+@ObjectType()
 class Experience {
   @Field((type) => String)
   title: string;
 
-  @Field((type) => Date)
-  fromDate: Date;
+  @Field((type) => String, { nullable: true })
+  fromDate: string;
 
-  @Field((type) => Date)
-  toDate: Date;
+  @Field((type) => String, { nullable: true })
+  toDate: string;
 
   @Field((type) => Boolean)
   present: boolean;
@@ -51,7 +61,7 @@ class Expertise {
   @Field((type) => String)
   label: string;
 
-  @Field((type) => Number)
+  @Field((type) => Int)
   percentage: number;
 }
 
@@ -70,50 +80,52 @@ class Award {
   description: string;
 }
 
-@InputType('ResumeInputType', { isAbstract: true })
+@InputType('ResumeInputTypeInput', { isAbstract: true })
 @ObjectType()
 @Entity()
 export class Resume extends BaseEntity {
   @Field((type) => User)
-  @ManyToOne((type) => User, (user) => user.resumes)
+  @OneToOne((type) => User, { eager: true })
+  @JoinColumn()
   user: User;
 
+  @Field((type) => Int)
   @RelationId((resume: Resume) => resume.user)
   userId: number;
 
-  @Field((type) => String)
+  @Field((type) => String, { nullable: true })
   @Column({ nullable: true })
   avatar: string;
 
-  @Field((type) => String)
-  @Column({ nullable: true })
-  coverLetter: string;
-
-  @Field((type) => [String])
-  @Column({ type: 'jsonb', nullable: true })
-  skills: string[];
+  @Field((type) => [MySkill])
+  @Column({ type: 'jsonb', nullable: true, default: [] })
+  skills: MySkill[];
 
   @Field((type) => [Education])
-  @Column({ type: 'jsonb', nullable: true })
+  @Column({ type: 'jsonb', nullable: true, default: [] })
   educations: Education[];
 
   @Field((type) => [Experience])
-  @Column({ type: 'jsonb', nullable: true })
+  @Column({ type: 'jsonb', nullable: true, default: [] })
   experiences: Experience[];
 
   @Field((type) => [Portfolio])
-  @Column({ type: 'jsonb', nullable: true })
+  @Column({ type: 'jsonb', nullable: true, default: [] })
   portfolios: Portfolio[];
 
   @Field((type) => [Expertise])
-  @Column({ type: 'jsonb', nullable: true })
+  @Column({ type: 'jsonb', nullable: true, default: [] })
   expertises: Expertise[];
 
   @Field((type) => [Language])
-  @Column({ type: 'jsonb', nullable: true })
+  @Column({ type: 'jsonb', nullable: true, default: [] })
   languages: Language[];
 
   @Field((type) => [Award])
-  @Column({ type: 'jsonb', nullable: true })
+  @Column({ type: 'jsonb', nullable: true, default: [] })
   awards: Award[];
+
+  @Field((type) => ResumeOpen)
+  @OneToMany(() => ResumeOpen, (resumeOpen) => resumeOpen.resume)
+  resumeOpen!: ResumeOpen[];
 }

@@ -1,0 +1,24 @@
+<div class="container mx-auto py-4 bg-white rounded">
+  <h2 class="px-8 text-2xl font-bold uppercase border-b">Post a New Job</h2>
+  <div class="col-span-2 px-8">
+    <app-stepper [linearModeSelected]="true" #appStepper>
+      <cdk-step
+        [label]="'Job Detail'"
+        [completed]="(form.get('formJobCreate').valid)">
+        <app-form-job-create [form]="form.get('formJobCreate')"
+                             [appStepper]="appStepper">
+        </app-form-job-create>
+      </cdk-step>
+      <cdk-step
+        [label]="'Package & Payments'"
+        [completed]="(form.get('formCheckOut').valid)">
+        <app-check-out [form]="form.get('formCheckOut')"
+                       [appStepper]="appStepper">
+        </app-check-out>
+      </cdk-step>
+      <cdk-step [label]="'Confirmation'">
+        <app-success></app-success>
+      </cdk-step>
+    </app-stepper>
+  </div>
+</div>

@@ -1,8 +1,17 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  RelationId,
+} from 'typeorm';
 import { BaseEntity } from '../../common/entities/base.entity';
 import {
   Field,
   InputType,
+  Int,
   ObjectType,
   registerEnumType,
 } from '@nestjs/graphql';
@@ -11,15 +20,21 @@ import { InternalServerErrorException } from '@nestjs/common';
 import { IsEmail, IsEnum } from 'class-validator';
 
 import { Payment } from '../../payments/entities/payment.entity';
-import { Resume } from '../../resumes/entities/resume.entity';
+import { JobType } from '../../jobs/entities/job-type.entity';
+import { JobSector } from '../../jobs/entities/job-sector.entity';
+import { City } from '../../cities/entities/city.entity';
+import { ResumeType } from '../../resumes/entities/resume-type.entity';
+import { ResumeOpen } from '../../resumes/entities/resume-open.entity';
+import { SearchCampaign } from '../../search/entities/ search-campaign.entity';
+import { JobPosition } from '../../jobs/entities/job-position.entity';
 
-enum UserRole {
+export enum UserRole {
   Candidate = 'Candidate',
   Employer = 'Employer',
   Admin = 'Admin',
 }
 
-enum UserSex {
+export enum UserSex {
   Male = 'Male',
   Female = 'Female',
 }
@@ -35,12 +50,12 @@ export class User extends BaseEntity {
   @Field((type) => String)
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field((type) => String)
   @IsEmail()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   @Field((type) => String)
   password: string;
 
@@ -49,57 +64,91 @@ export class User extends BaseEntity {
   @IsEnum(UserRole)
   role: UserRole;
 
-  @Field((type) => [Payment])
-  @OneToMany(
-    type => Payment,
-    payment => payment.user,
-    { eager: true },
-  )
-  payments: Payment[];
+  @Column({ nullable: true })
+  @Field((type) => String, { nullable: true })
+  phone?: string;
 
   @Column({ type: 'enum', enum: UserSex, nullable: true })
-  @Field((type) => UserSex)
+  @Field((type) => UserSex, { nullable: true })
   @IsEnum(UserSex)
   sex: UserSex;
 
   @Column({ nullable: true })
-  @Field((type) => Date)
+  @Field((type) => Date, { nullable: true })
   birthDay: Date;
 
   @Column({ nullable: true })
-  @Field((type) => String)
+  @Field((type) => String, { nullable: true })
   address: string;
 
   @Column({ nullable: true })
-  @Field((type) => String)
-  phone: string;
-
-  @Column({ nullable: true })
-  @Field((type) => String)
+  @Field((type) => String, { nullable: true })
   description: string;
 
-  @Field((type) => [Resume])
-  @OneToMany(
-    type => Resume,
-    resume => resume.user,
-    { eager: true },
-  )
-  resumes: Resume[];
+  @Field((type) => JobPosition, { nullable: true })
+  @ManyToOne((type) => JobPosition, { nullable: true })
+  jobPosition: JobPosition;
+
+  @RelationId((user: User) => user.jobPosition)
+  jobPositionId: number;
+
+  @Field((type) => JobType, { nullable: true })
+  @ManyToOne((type) => JobType, { nullable: true })
+  jobType: JobType;
+
+  @RelationId((user: User) => user.jobType)
+  jobTypeId: number;
+
+  @Field((type) => JobSector, { nullable: true })
+  @ManyToOne((type) => JobSector, { nullable: true })
+  jobSector: JobSector;
+
+  @RelationId((user: User) => user.jobSector)
+  jobSectorId: number;
+
+  @Field((type) => [Payment])
+  @OneToMany((type) => Payment, (payment) => payment.user, { eager: true })
+  payments: Payment[];
+
+  @Field((type) => [ResumeType])
+  @OneToMany((type) => ResumeType, (resumeType) => resumeType.user)
+  resumeTypes: ResumeType[];
+
+  @Field((type) => [ResumeOpen])
+  @OneToMany((type) => ResumeOpen, (resumeOpen) => resumeOpen.user)
+  resumeOpens: ResumeOpen[];
+
+  @Field((type) => [SearchCampaign])
+  @OneToMany((type) => SearchCampaign, (searchCampaign) => searchCampaign.user)
+  searchCampaignList: SearchCampaign[];
+
+  @Column({ default: false })
+  @Field((type) => Boolean)
+  verified: boolean;
+
+  @Field((type) => City, { nullable: true })
+  @ManyToOne((type) => City, { nullable: true })
+  city: City;
+
+  @Field((type) => Int)
+  @RelationId((user: User) => user.city)
+  cityId: number;
 
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword(): Promise<void> {
-    try {
-      this.password = await bcrypt.hash(this.password, 10);
-    } catch (e) {
-      throw new InternalServerErrorException();
+    if (this.password) {
+      try {
+        this.password = await bcrypt.hash(this.password, 10);
+      } catch (e) {
+        throw new InternalServerErrorException();
+      }
     }
   }
 
   async checkPassword(password: string): Promise<boolean> {
     try {
-      const ok = await bcrypt.compare(password, this.password);
-      return ok;
+      return await bcrypt.compare(password, this.password);
     } catch (e) {
       throw new InternalServerErrorException();
     }

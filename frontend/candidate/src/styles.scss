@@ -1,36 +1,18 @@
-@import 'ng-zorro-antd/style/index.min.css';
-@import 'ng-zorro-antd/modal/style/index.min.css';
-@import 'ng-zorro-antd/notification/style/index.min.css';
-@import 'ng-zorro-antd/dropdown/style/index.min.css';
-@import 'ng-zorro-antd/switch/style/index.min.css';
+@import '~ng-zorro-antd/style/index.min.css';
+@import '~ng-zorro-antd/modal/style/index.min.css';
+@import '~ng-zorro-antd/notification/style/index.min.css';
+@import '~ng-zorro-antd/dropdown/style/index.min.css';
+@import '~ng-zorro-antd/switch/style/index.min.css';
+@import '~ng-zorro-antd/pagination/style/index.min.css';
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
-
-@layer components {
-  .btn {
-    @apply focus:outline-none;
-
-    &.btn-indigo {
-      @apply text-white py-2 px-6 border border-indigo-500 bg-indigo-500 rounded hover:text-indigo-500 hover:bg-white;
-    }
-
-    &.btn-indigo-outline {
-      @apply text-indigo-500 py-2 px-6 border border-indigo-500 bg-white rounded hover:text-white hover:bg-indigo-500;
-    }
-
-    &.btn-red-outline {
-      @apply text-red-500 py-2 px-6 border border-red-500 bg-white rounded hover:text-white hover:bg-red-500;
-    }
-  }
-}
+/* You can add global styles to this file, and also import other style files */
 
 body {
   font-family: 'Roboto', sans-serif;
-  @apply bg-gray-200;
+  @apply bg-gray-100 text-sm text-gray-900 font-normal leading-normal antialiased;
 }
 
 .ng-select-container.ng-appearance-outline {
@@ -82,8 +64,4 @@ body {
 
 .ng-value span:first-child {
   border-right: 1px solid #ffffff;
-}
-
-.ant-switch-checked {
-  @apply bg-indigo-500;
 }

@@ -1,0 +1,345 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <span *ngIf="vm.loading; else done">Loading...</span>
+  <ng-template #done>
+    <div class="space-y-6">
+      <div class="bg-white rounded overflow-hidden shadow">
+        <div style="background-image: url('./assets/bg-resume.jpg')"
+             class="h-56 w-full bg-cover"></div>
+        <div class="p-4">
+          <div class="flex">
+            <div
+              (click)="openEditAvatarModal()"
+              class="-mt-24 w-40 h-40 rounded-full bg-gray-100 shadow cursor-pointer">
+              <img *ngIf="vm.resume?.avatar" [src]="vm.resume.avatar" alt="avatar" class="rounded-full"/>
+            </div>
+            <div class="pl-12">
+              <div class="inline-flex items-center">
+                <h5 class="font-bold text-2xl">
+                  {{ vm.resume.user.name }}
+                </h5>
+                <div class="ml-3">
+                  <a routerLink="/account/profile" title="Edit">
+                    <svg class="w-6 h-6 hover:text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Educations ==========-->
+      <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+        <div class="flex justify-between items-center">
+          <div class="space-y-3">
+            <h3 class="text-xl font-bold">Educations</h3>
+            <p class="text-sm text-gray-700 max-w-lg">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+              in, inventore laborum modi nostrum perspiciatis provident quidem.
+            </p>
+            <div>
+              <app-button
+                (click)="openEditEducationModal('Add Education', vm.resume.educations)">
+                Add new
+              </app-button>
+            </div>
+          </div>
+          <svg
+            class="w-24 h-24 text-indigo-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+            </path>
+          </svg>
+        </div>
+        <div class="divide-y">
+          <div *ngFor="let education of vm.resume.educations; let i = index" class="py-6 pr-3 flex justify-between">
+            <div class="flex-1">
+              <p class="text-xl font-bold">{{ education.institute }}</p>
+              <p class="text-sm text-gray-600">{{ education.title }}</p>
+              <p class="text-sm text-gray-600">{{ education.year }}</p>
+            </div>
+            <button
+              (click)="openEditEducationModal('Edit Education', vm.resume.educations, i)"
+              class="focus:outline-none" title="Edit">
+              <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Experiences ==========-->
+      <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+        <div class="flex justify-between items-center">
+          <div class="space-y-3">
+            <h3 class="text-xl font-bold">Experiences</h3>
+            <p class="text-sm text-gray-700 max-w-lg">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+              in, inventore laborum modi nostrum perspiciatis provident quidem.
+            </p>
+            <div>
+              <app-button
+                (click)="openEditExperienceModal('Add Experience', vm.resume.experiences)"
+              >
+                Add new
+              </app-button>
+            </div>
+          </div>
+          <svg
+            class="w-24 h-24 text-indigo-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+            </path>
+          </svg>
+        </div>
+        <div class="divide-y">
+          <div *ngFor="let experience of vm.resume.experiences; let i = index" class="py-6 pr-3 flex justify-between">
+            <div class="flex-1">
+              <p class="text-xl font-bold">{{ experience.company }}</p>
+              <p *ngIf="experience.present" class="text-sm text-gray-600">
+                Present
+              </p>
+              <p *ngIf="!experience.present" class="text-sm text-gray-600">
+                {{ experience.fromDate | date }} - {{ experience.toDate | date }}
+              </p>
+              <p class="text-sm text-gray-600">
+                {{ experience.title }}
+              </p>
+            </div>
+            <button
+              (click)="openEditExperienceModal('Edit Experience', vm.resume.experiences, i)"
+              class="focus:outline-none" title="Edit">
+              <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Portfolios ==========-->
+      <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+        <div class="flex justify-between items-center">
+          <div class="space-y-3">
+            <h3 class="text-xl font-bold">Portfolios</h3>
+            <p class="text-sm text-gray-700 max-w-lg">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+              in, inventore laborum modi nostrum perspiciatis provident quidem.
+            </p>
+            <div>
+              <app-button
+                (click)="openEditPortfolioModal('Add Portfolio', vm.resume.portfolios)"
+              >
+                Add new
+              </app-button>
+            </div>
+          </div>
+          <svg
+            class="w-24 h-24 text-indigo-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+            </path>
+          </svg>
+        </div>
+        <div class="divide-y">
+          <div *ngFor="let portfolio of vm.resume.portfolios; let i = index" class="py-6 pr-3 flex justify-between">
+            <div class="flex-1">
+              <div class="flex">
+                <img class="w-24 h-24 border" [src]="portfolio.image" [alt]="portfolio.title">
+                <div class="ml-4">
+                  <p class="text-xl font-bold">{{portfolio.title}}</p>
+                  <a [href]="portfolio.url"
+                     target="_blank"
+                     class="text-indigo-500 hover:underline">
+                    Project Link
+                  </a>
+                </div>
+              </div>
+            </div>
+            <button
+              (click)="openEditPortfolioModal('Add Portfolio', vm.resume.portfolios, i)"
+              class="focus:outline-none" title="Edit">
+              <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Expertises ==========-->
+      <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+        <div class="flex justify-between items-center">
+          <div class="space-y-3">
+            <h3 class="text-xl font-bold">Expertises</h3>
+            <p class="text-sm text-gray-700 max-w-lg">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+              in, inventore laborum modi nostrum perspiciatis provident quidem.
+            </p>
+            <div>
+              <app-button
+                (click)="openEditExpertiseModal('Add Expertise', vm.resume.expertises)"
+              >
+                Add new
+              </app-button>
+            </div>
+          </div>
+          <svg
+            class="w-24 h-24 text-indigo-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+            </path>
+          </svg>
+        </div>
+        <div class="divide-y">
+          <div *ngFor="let expertise of vm.resume.expertises; let i = index" class="py-6 pr-3 flex justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-4">
+                <p class="text-2xl font-bold w-24 truncate">{{ expertise.label }}</p>
+                <div class="bg-gray-300 relative w-2/3 h-2">
+                  <div [style.width.%]="expertise.percentage" class="absolute inset-y-0 bg-indigo-500"></div>
+                </div>
+                <div class="flex items-center justify-center w-12 h-12 border-2 border-indigo-500 rounded-full">
+                  <span class="text-xl font-bold text-indigo-500">
+                    {{ expertise.percentage }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              (click)="openEditExpertiseModal('Edit Expertise', vm.resume.expertises, i)"
+              class="focus:outline-none" title="Edit">
+              <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Languages ==========-->
+      <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+        <div class="flex justify-between items-center">
+          <div class="space-y-3">
+            <h3 class="text-xl font-bold">Languages</h3>
+            <p class="text-sm text-gray-700 max-w-lg">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+              in, inventore laborum modi nostrum perspiciatis provident quidem.
+            </p>
+            <div>
+              <app-button
+                (click)="openEditLanguageModal('Add Language', vm.resume.languages)"
+              >
+                Add new
+              </app-button>
+            </div>
+          </div>
+          <svg
+            class="w-24 h-24 text-indigo-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+            </path>
+          </svg>
+        </div>
+        <div class="divide-y">
+          <div *ngFor="let language of vm.resume.languages; let i = index" class="py-6 pr-3 flex justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-4">
+                <p class="text-2xl font-bold w-24 truncate">{{ language.label }}</p>
+                <div class="bg-gray-300 relative w-2/3 h-2">
+                  <div [style.width.%]="language.percentage" class="absolute inset-y-0 bg-indigo-500"></div>
+                </div>
+                <div class="flex items-center justify-center w-12 h-12 border-2 border-indigo-500 rounded-full">
+                  <span class="text-xl font-bold text-indigo-500">
+                    {{ language.percentage }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              (click)="openEditLanguageModal('Edit Language', vm.resume.languages, i)"
+              class="focus:outline-none" title="Edit">
+              <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Awards ==========-->
+      <div class="py-5 px-6 bg-white rounded overflow-hidden shadow">
+        <div class="flex justify-between items-center">
+          <div class="space-y-3">
+            <h3 class="text-xl font-bold">Awards</h3>
+            <p class="text-sm text-gray-700 max-w-lg">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dolores est et
+              in, inventore laborum modi nostrum perspiciatis provident quidem.
+            </p>
+            <div>
+              <app-button
+                (click)="openEditAwardModal('Add Award', vm.resume.awards)"
+              >
+                Add new
+              </app-button>
+            </div>
+          </div>
+          <svg
+            class="w-24 h-24 text-indigo-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+            </path>
+          </svg>
+        </div>
+        <div class="divide-y">
+          <div *ngFor="let award of vm.resume.awards; let i = index" class="py-6 pr-3 flex justify-between">
+            <div class="flex-1">
+              <p class="text-xl font-bold">{{ award.title }}</p>
+              <p class="text-sm text-gray-600">{{ award.year }}</p>
+              <p class="text-sm text-gray-600 max-w-2xl break-words">{{ award.description }}</p>
+            </div>
+            <button
+              (click)="openEditAwardModal('Edit Award', vm.resume.awards, i)"
+              class="focus:outline-none" title="Edit">
+              <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>

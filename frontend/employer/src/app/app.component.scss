@@ -1,0 +1,75 @@
+::ng-deep .ant-spin {
+  .ant-spin-dot-item {
+    @apply bg-indigo-500;
+  }
+}
+
+::ng-deep ng-select {
+  @apply w-full;
+
+  .ng-input {
+    @apply px-4;
+  }
+
+  &:focus {
+    @apply border-gray-500;
+  }
+
+  .ng-placeholder {
+    @apply text-gray-500;
+  }
+
+  .ng-has-value .ng-placeholder {
+    @apply hidden;
+  }
+
+  .ng-select-container {
+    @apply px-4 py-3 border text-xs rounded-sm;
+  }
+
+  ng-dropdown-panel {
+    @apply border-l border-r border-b px-3 py-1 bg-white;
+
+    .ng-option {
+      @apply text-gray-600 w-full text-xs;
+
+      &.ng-option-marked {
+        @apply text-gray-900;
+      }
+    }
+  }
+
+  &.ng-select-opened {
+    .ng-arrow-wrapper {
+      width: 25px;
+      padding-right: 5px;
+
+      .ng-arrow {
+        top: -2px;
+        border-color: transparent transparent #999999;
+        border-width: 0 5px 5px;
+      }
+    }
+  }
+
+  .ng-arrow-wrapper {
+    width: 25px;
+    padding-right: 5px;
+
+    .ng-arrow {
+      border-color: #999999 transparent transparent;
+      border-style: solid;
+      border-width: 5px 5px 2.5px;
+    }
+  }
+
+  &.ng-select-multiple {
+    .ng-value {
+      @apply border px-1 mr-2;
+
+      .left {
+        @apply mr-1 pr-1 border-r;
+      }
+    }
+  }
+}

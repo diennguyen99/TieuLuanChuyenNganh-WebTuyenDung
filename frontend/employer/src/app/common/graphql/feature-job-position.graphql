@@ -1,0 +1,10 @@
+query jobPositionsQuery {
+  jobPositions {
+    ok
+    error
+    results {
+      name
+      slug
+    }
+  }
+}

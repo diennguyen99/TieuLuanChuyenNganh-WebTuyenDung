@@ -1,0 +1,152 @@
+<div class="bg-white pb-3 rounded shadow">
+  <div class="bg-gray-300 bg-white px-8 py-2">
+    <h2 class="text-xl font-bold">Campaign list</h2>
+  </div>
+  <div class="px-8 py-6">
+    <div class="flex justify-between">
+      <h5>Total: <span class="text-indigo-500 font-medium">{{ totalResults }}</span> campaign</h5>
+      <button (click)="openModalCreateCampaign()"
+              class="focus:outline-none py-2 px-6 flex items-center text-white border border-indigo-500 bg-indigo-500 hover:text-indigo-500 hover:bg-white">
+        <svg
+          class="w-4 h-4 mr-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+          </path>
+        </svg>
+        Create Campaign
+      </button>
+    </div>
+    <table class="mt-5 w-full">
+      <thead>
+      <tr class="border-b-2 border-gray-500">
+        <th class="py-3 px-4 text-left">No</th>
+        <th class="py-3 px-4 text-left">Name</th>
+        <th class="py-3 px-4 text-left">Criteria</th>
+        <th class="py-3 px-4 text-left">Job type</th>
+        <th class="py-3 px-4 text-left">Date created</th>
+        <th class="w-12 py-3 px-4 text-left">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let searchCampaign of searchCampaigns; let i = index"
+          class="border-b-2">
+        <td class="p-4">#{{ (currentPage - 1) * totalItemPerPage + i + 1 }}</td>
+        <td class="p-4">
+          <a routerLink="/find-candidates/{{ searchCampaign.id }}"
+             class="hover:underline">
+            {{ searchCampaign.name }}
+          </a>
+        </td>
+        <td class="p-4 space-y-1">
+          <div class="flex items-center">
+            <svg
+              class="w-4 h-4 mr-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+              </path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z">
+              </path>
+            </svg>
+            {{ searchCampaign.city.name }}
+          </div>
+          <div class="flex items-center">
+            <svg
+              class="w-4 h-4 mr-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+              </path>
+            </svg>
+            {{ searchCampaign.jobPosition.name }}
+          </div>
+        </td>
+        <td class="p-4 space-y-1">
+          <div class="flex items-center">
+            <svg
+              class="w-4 h-4 mr-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+              </path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z">
+              </path>
+            </svg>
+            {{ searchCampaign.jobType.name }}
+          </div>
+          <div class="flex items-center">
+            <svg
+              class="w-4 h-4 mr-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+              </path>
+            </svg>
+            {{ searchCampaign.jobSector.name }}
+          </div>
+        </td>
+        <td class="p-4">
+          <time>{{ searchCampaign.createdAt | date }}</time>
+        </td>
+        <td class="p-4">
+          <div class="flex space-x-2">
+            <button (click)="openModalEditCampaign(i)"
+                    title="Edit"
+                    class="focus:outline-none p-2 border hover:bg-gray-300">
+              <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            </button>
+            <button (click)="openModalDeleteCampaign(searchCampaign.id)"
+                    title="Delete"
+                    class="focus:outline-none p-2 border hover:bg-gray-300">
+              <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-6 py-4 float-right">
+    <nz-pagination [(nzPageIndex)]="currentPage"
+                   [nzPageSize]="totalItemPerPage"
+                   [nzTotal]="totalResults"
+                   (nzPageIndexChange)="changePageIndex()">
+    </nz-pagination>
+  </div>
+</div>

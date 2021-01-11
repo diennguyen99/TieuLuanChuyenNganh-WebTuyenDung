@@ -1,0 +1,10 @@
+query jobTypesQuery {
+  jobTypes {
+    ok
+    error
+    results {
+      name
+      slug
+    }
+  }
+}

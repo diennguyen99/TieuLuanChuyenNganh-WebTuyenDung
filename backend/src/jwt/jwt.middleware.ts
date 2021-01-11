@@ -12,12 +12,11 @@ export class JwtMiddleware implements NestMiddleware {
 
   async use(req: Request, res: Response, next: NextFunction) {
     if ('authorization' in req.headers) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const token = req.headers['authorization'];
+      const token = req.headers['authorization'].split(' ')[1];
 
       try {
         const decoded = this.jwtService.verify(token.toString());
+
         if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
           const user = await this.userService.findById(decoded['id']);
           req['user'] = user;

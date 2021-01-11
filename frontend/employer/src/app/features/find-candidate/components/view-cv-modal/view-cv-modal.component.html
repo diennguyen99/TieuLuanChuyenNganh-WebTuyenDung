@@ -1,0 +1,127 @@
+<div class="border rounded p-10">
+  <div class="flex space-x-10">
+    <div class="h-40 w-40 rounded-full border">
+      <img [src]="resume?.avatar" alt="avatar" class="w-full h-full rounded-full">
+    </div>
+    <div>
+      <h2 class="text-4xl text-indigo-500 font-bold">Tran Tuan Nam</h2>
+      <div>
+        <label class="inline-block w-24 font-bold">Date of birth:</label>
+        <span>Dec 12, 19998</span>
+      </div>
+      <div>
+        <label class="inline-block w-24 font-bold">Gender:</label>
+        <span>Male</span>
+      </div>
+      <div>
+        <label class="inline-block w-24 font-bold">Email:</label>
+        <span>[protected data]</span>
+      </div>
+      <div>
+        <label class="inline-block w-24 font-bold">Phone:</label>
+        <span>[protected data]</span>
+      </div>
+      <div>
+        <label class="inline-block w-24 font-bold">Address:</label>
+        <span>Ha Noi</span>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8">
+    <h3 class="text-xl uppercase text-gray-900 font-medium border-b-2 border-gray-900">
+      Description
+    </h3>
+    <div class="py-3">
+      <p class="leading-tight">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Accusantium, laborum quaerat. Consequuntur dicta fuga o
+        dit unde vero. Ea earum, iure minima modi officia, porro
+        provident quasi quo ratione totam voluptas.
+      </p>
+    </div>
+  </div>
+  <div class="mt-4">
+    <h3 class="text-xl uppercase text-gray-900 font-medium border-b-2 border-gray-900">
+      Education
+    </h3>
+    <div>
+      <ul>
+        <li class="py-3 border-b">
+          <div class="flex">
+            <p class="w-48">Aug 2016 - Present</p>
+            <p class="font-medium">Lorem ipsum dolor sit amet</p>
+          </div>
+        </li>
+        <li class="py-3 border-b">
+          <div class="flex">
+            <p class="w-48">Aug 2016 - Present</p>
+            <p class="font-medium">Lorem ipsum dolor sit amet</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-4">
+    <h3 class="text-xl uppercase text-gray-900 font-medium border-b-2 border-gray-900">
+      Language
+    </h3>
+    <div>
+      <ul>
+        <li class="py-3 border-b">
+          <div class="flex items-center">
+            <p class="w-48 capitalize">English</p>
+            <div class="flex w-full items-center justify-between">
+              <div class="relative w-5/6 h-2 bg-gray-200">
+                <div style="width: 69%" class="absolute inset-y-0 bg-indigo-500"></div>
+              </div>
+              <div class="mr-3 h-10 w-10 flex items-center justify-center border rounded-full">
+                <span class="text-indigo-500 font-medium">69</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="py-3 border-b">
+          <div class="flex items-center">
+            <p class="w-48 capitalize">English</p>
+            <div class="flex w-full items-center justify-between">
+              <div class="relative w-5/6 h-2 bg-gray-200">
+                <div style="width: 69%" class="absolute inset-y-0 bg-indigo-500"></div>
+              </div>
+              <div class="mr-3 h-10 w-10 flex items-center justify-center border rounded-full">
+                <span class="text-indigo-500 font-medium">69</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="mt-4 flex justify-between">
+  <button (click)="onCloseModal()"
+          class="focus:outline-none py-2 px-4 border bg-gray-200 hover:bg-white">
+    Cancel
+  </button>
+  <button (click)="onSubmit()"
+          class="focus:outline-none py-2 px-4 flex items-center text-white border border-indigo-500 bg-indigo-500 hover:bg-white hover:text-indigo-500">
+    <svg
+      class="w-6 h-6 mr-2"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+      </path>
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+      </path>
+    </svg>
+    See contact<span class="p-1 ml-3 rounded bg-yellow-500"> -1 point</span>
+  </button>
+</div>

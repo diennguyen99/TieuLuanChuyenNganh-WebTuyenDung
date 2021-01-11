@@ -1,0 +1,50 @@
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="form"
+  class="mt-8 p-5 max-w-5xl mx-auto bg-white shadow flex"
+>
+  <div class="flex-1 grid grid-cols-4 divide-x border-l">
+    <ng-select
+      formControlName="name"
+      [items]="[]"
+      [addTag]="true"
+      [selectOnTab]="true"
+      [isOpen]="false"
+      placeholder="Job Title..."
+      class="col-span-2 p-4 text-xs border-t border-b w-full">
+    </ng-select>
+    <ng-select
+      *ngIf="cityVm$ | async as cityVm"
+      formControlName="city"
+      appearance="outline"
+      [searchable]="false"
+      [clearable]="false"
+      placeholder="City"
+      class="p-1 border-t border-b w-full capitalize"
+    >
+      <ng-option *ngFor="let city of cityVm.cities" [value]="city.slug" >
+        {{ city.name }}
+      </ng-option>
+    </ng-select>
+    <ng-select
+      *ngIf="jobSectorVm$ | async as jobSectorVm"
+      formControlName="jobSector"
+      appearance="outline"
+      [searchable]="false"
+      [clearable]="false"
+      placeholder="Job Sector"
+      class="p-1 border-t border-b w-full capitalize"
+    >
+      anc
+      <ng-option *ngFor="let jobSector of jobSectorVm.jobSectors" [value]="jobSector.slug">
+        {{ jobSector.name }}
+      </ng-option>
+    </ng-select>
+  </div>
+  <button [disabled]="form.invalid"
+          type="submit"
+          class="focus:outline-none px-5 bg-indigo-500">
+    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+  </button>
+</form>
+

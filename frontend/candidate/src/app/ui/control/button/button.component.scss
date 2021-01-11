@@ -1,0 +1,25 @@
+.btn {
+  @apply px-4 h-8 inline-flex items-center justify-center text-white whitespace-nowrap rounded-sm align-middle appearance-none cursor-pointer select-none;
+
+  &.disabled {
+    @apply opacity-50 cursor-default pointer-events-none;
+  }
+
+  &.primary {
+    @apply bg-indigo-500;
+
+    &:focus,
+    &:active {
+      outline-color: #818CF8;
+    }
+  }
+
+  &.danger {
+    @apply bg-red-500;
+
+    &:focus,
+    &:active {
+      outline-color: #feb2b2;
+    }
+  }
+}

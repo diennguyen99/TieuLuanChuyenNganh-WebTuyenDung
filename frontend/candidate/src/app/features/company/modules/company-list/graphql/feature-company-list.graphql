@@ -1,0 +1,21 @@
+query filterCompany($input: SearchCompaniesInput!) {
+  searchCompanies(input: $input) {
+    ok
+    error
+    totalResults
+    totalPages
+    companies {
+      name
+      slug
+      logo
+      thumbnail
+      description
+      city {
+        name
+      }
+      jobs {
+        name
+      }
+    }
+  }
+}

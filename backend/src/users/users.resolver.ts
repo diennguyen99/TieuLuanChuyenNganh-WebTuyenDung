@@ -11,7 +11,11 @@ import { AuthGuard } from '../auth/auth.guard';
 import { AuthUser } from '../auth/auth-user.decorator';
 import { UserProfileInput, UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
-import { ChangePasswordInput, ChangePasswordOutput } from './dtos/change-password.dto';
+import {
+  ChangePasswordInput,
+  ChangePasswordOutput,
+} from './dtos/change-password.dto';
+import { VerifyEmailInput, VerifyEmailOutput } from './dtos/verify-email.dto';
 
 @Resolver((of) => User)
 export class UsersResolver {
@@ -95,17 +99,17 @@ export class UsersResolver {
   async changePassword(
     @AuthUser() authUser: User,
     @Args('input') changePasswordInput: ChangePasswordInput,
-  ): Promise<EditProfileOutput> {
-    try {
-      await this.usersService.changePassword(authUser.id, changePasswordInput);
-      return {
-        ok: true,
-      };
-    } catch (error) {
-      return {
-        ok: false,
-        error,
-      };
-    }
+  ): Promise<ChangePasswordOutput> {
+    return await this.usersService.changePassword(
+      authUser.id,
+      changePasswordInput,
+    );
+  }
+
+  @Mutation((returns) => VerifyEmailOutput)
+  async verifyEmail(
+    @Args('input') { code }: VerifyEmailInput,
+  ): Promise<VerifyEmailOutput> {
+    return await this.usersService.verifyEmail(code);
   }
 }

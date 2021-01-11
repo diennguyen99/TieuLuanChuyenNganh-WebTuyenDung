@@ -1,0 +1,63 @@
+<div
+  style="background-image: url('./assets/bg-search-company.jpg')"
+  class="h-64 pt-12 bg-cover"
+>
+  <div class="p-6 max-w-3xl mx-auto rounded" style="background-color: rgba(51,51,51,.6);">
+    <p class="text-white text-xl">
+      Look up <b>company information</b> on Ute Recruitment
+    </p>
+
+    <!-- ========== Search Form =========== -->
+    <app-search-company-form [params]="params"></app-search-company-form>
+  </div>
+</div>
+
+<div class="py-6">
+  <div class="px-6 pt-6 pb-20 max-w-5xl mx-auto bg-white">
+    <h2 class="text-indigo-500 text-3xl uppercase font-bold flex items-center">
+      <svg class="w-8 h-8 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+      Companies
+    </h2>
+    <ng-container *ngIf="vm$ | async as vm">
+      <span *ngIf="vm.loading; else done">Loading...</span>
+      <ng-template #done>
+        <div class="mt-6 grid grid-cols-3 gap-6">
+          <!-- ======== LIST COMPANY ========= -->
+          <div *ngFor="let company of vm.results" class="border bg-white">
+            <img class="h-40 w-full"
+                 [src]="company.thumbnail"
+                 alt="company">
+            <div class="px-4 -mt-6 flex items-center">
+              <img class="w-20 h-20 border" [src]="company.logo" alt="company">
+              <a [routerLink]="['/companies', company.slug]">
+                <h2 class="ml-2 text-base font-medium">{{ company.name }}</h2>
+              </a>
+            </div>
+            <div class="px-4 py-3 space-y-3">
+              <p class="text-sm text-gray-900">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+              <div class="flex items-center justify-between">
+            <span class="flex items-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span class="ml-1">{{ company.city.name }}</span>
+            </span>
+                <span class="flex items-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <span class="ml-1">{{ company.jobs.length }} Jobs</span>
+            </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 float-right">
+          <nz-pagination [nzPageIndex]="currentPage"
+                         (nzPageIndexChange)="onChangeCurrentPage()"
+                         [nzPageSize]="pageSize(vm.totalPages, vm.totalResults)"
+                         [nzTotal]="vm.totalResults">
+          </nz-pagination>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>

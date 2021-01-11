@@ -1,0 +1,153 @@
+<app-loading *ngIf="loading"></app-loading>
+<form
+  *ngIf="form"
+  [formGroup]="form">
+  <app-input
+    [control]="form.get('name')"
+    label="Title"
+    inputType="text">
+  </app-input>
+  <div class="mb-3 grid grid-cols-2 gap-6">
+    <div class="space-y-1">
+      <label class="font-bold text-sm">Job type</label>
+      <ng-select
+        formControlName="jobTypeSlug"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select job type">
+        <ng-option
+          *ngFor="let jobType of jobTypes"
+          [value]="jobType.slug">
+          {{ jobType.name }}
+        </ng-option>
+      </ng-select>
+    </div>
+    <div class="space-y-1">
+      <label class="font-bold text-sm">Job sector</label>
+      <ng-select
+        formControlName="jobSectorSlug"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select job sector">
+        <ng-option
+          *ngFor="let jobSector of jobSectors"
+          [value]="jobSector.slug">
+          {{ jobSector.name }}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+  <div class="grid grid-cols-3 gap-6">
+    <div class="mb-3 space-y-1">
+      <label class="font-bold text-sm">Salary Type</label>
+      <ng-select
+        formControlName="salaryType"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select city">
+        <ng-option value="Monthly">
+          Monthly
+        </ng-option>
+        <ng-option value="Weekly">
+          Weekly
+        </ng-option>
+        <ng-option value="Hourly">
+          Hourly
+        </ng-option>
+        <ng-option value="Negotiable">
+          Negotiable
+        </ng-option>
+      </ng-select>
+    </div>
+    <app-input
+      *ngIf="form.get('salaryType').value !== 'Negotiable'"
+      [control]="form.get('salaryMin')"
+      label="Salary Min"
+      inputType="number">
+    </app-input>
+    <app-input
+      *ngIf="form.get('salaryType').value !== 'Negotiable'"
+      [control]="form.get('salaryMax')"
+      label="Salary Max"
+      inputType="number">
+    </app-input>
+  </div>
+  <div class="mb-3 grid grid-cols-2 gap-6">
+    <div class="space-y-1">
+      <label class="font-bold text-sm">City</label>
+      <ng-select
+        formControlName="citySlug"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select city">
+        <ng-option
+          *ngFor="let city of cities"
+          [value]="city.slug">
+          {{ city.name }}
+        </ng-option>
+      </ng-select>
+    </div>
+    <div class="space-y-1">
+      <label class="font-bold text-sm">Job position</label>
+      <ng-select
+        formControlName="jobPositionSlug"
+        appearance="outline"
+        [searchable]="false"
+        [clearable]="false"
+        placeholder="Select job position">
+        <ng-option
+          *ngFor="let jobPosition of jobPositions"
+          [value]="jobPosition.slug">
+          {{ jobPosition.name }}
+        </ng-option>
+      </ng-select>
+    </div>
+  </div>
+  <app-input
+    [control]="form.get('address')"
+    label="Address"
+    inputType="text">
+  </app-input>
+  <div class="mb-3">
+    <label class="text-sm font-bold">Description</label>
+    <div class="mt-1">
+      <quill-editor
+        formControlName="description"
+        class="content-editor"
+        [styles]="{'min-height': '120px', height: '200px'}"
+        [placeholder]="''">
+      </quill-editor>
+    </div>
+  </div>
+</form>
+
+<div class="mt-6 flex justify-between">
+  <button
+    routerLink="/jobs"
+    class="focus:outline-none py-2 px-8 border">
+    Back to list jobs
+  </button>
+  <button
+    [disabled]="form && form.invalid"
+    (click)="onSubmit()"
+    class="focus:outline-none py-2 px-8 flex items-center text-white border border-indigo-500 bg-indigo-500 hover:bg-white hover:text-indigo-500">
+    Go to package
+    <svg
+      class="w-6 h-6 text-white ml-2"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1"
+        d="M17 8l4 4m0 0l-4 4m4-4H3">
+      </path>
+    </svg>
+  </button>
+</div>

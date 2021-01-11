@@ -1,0 +1,10 @@
+query cities {
+  allCities {
+    ok
+    error
+    cities {
+      name
+      slug
+    }
+  }
+}

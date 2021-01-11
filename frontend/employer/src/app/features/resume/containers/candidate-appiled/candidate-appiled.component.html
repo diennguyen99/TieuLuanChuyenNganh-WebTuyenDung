@@ -1,0 +1,27 @@
+<div class="mt-6">
+  <h3 class="mb-4 font-bold text-3xl">Candidates Applied</h3>
+  <div class="container mx-auto">
+    <ul class="mt-3 space-y-1">
+      <li *ngFor="let candidate of candidates">
+        <div (click)="openResumeModal()"
+             class="px-3 py-2 bg-white h-24 cursor-pointer rounded-sm shadow overflow-hidden duration-200 hover:bg-gray-300">
+          <div class="h-full flex justify-between">
+            <div>
+              <h4 class="text-2xl font-medium text-gray-900 leading-none">
+                {{ candidate.name }}
+              </h4>
+              <span class="text-xs font-light">{{ candidate.email }}</span>
+              <br/>
+              <span class="text-indigo-500 text-sm font-light">
+                {{ candidate.job.name }}
+              </span>
+            </div>
+            <p *ngIf="candidate.content">
+              Content: {{ candidate.content }}
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

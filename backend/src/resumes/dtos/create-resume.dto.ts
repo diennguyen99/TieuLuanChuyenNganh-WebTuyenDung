@@ -1,6 +1,14 @@
-import { Field, InputType, ObjectType, OmitType, PickType } from '@nestjs/graphql';
-import { Resume } from '../entities/resume.entity';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { BaseOutput } from '../../common/dtos/output.dto';
+
+@InputType()
+export class CreateMySkillInput {
+  @Field((type) => String)
+  name: string;
+
+  @Field((type) => Number)
+  percentage: number;
+}
 
 @InputType()
 export class CreateEducationInput {
@@ -19,11 +27,11 @@ export class CreateExperienceInput {
   @Field((type) => String)
   title: string;
 
-  @Field((type) => Date)
-  fromDate: Date;
+  @Field((type) => String, { nullable: true })
+  fromDate: string;
 
-  @Field((type) => Date)
-  toDate: Date;
+  @Field((type) => String, { nullable: true })
+  toDate: string;
 
   @Field((type) => Boolean)
   present: boolean;
@@ -76,8 +84,8 @@ export class CreateResumeInput {
   @Field((type) => String, { nullable: true })
   avatar: string;
 
-  @Field((type) => [String], { nullable: true })
-  skills: string[];
+  @Field((type) => [CreateMySkillInput], { nullable: true })
+  skills: CreateMySkillInput[];
 
   @Field((type) => [CreateEducationInput], { nullable: true })
   educations: CreateEducationInput[];

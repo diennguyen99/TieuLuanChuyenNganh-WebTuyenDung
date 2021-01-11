@@ -1,0 +1,156 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <span *ngIf="vm.loading; else done">Loading</span>
+  <ng-template #done>
+    <div class="bg-white p-6">
+      <h2 class="text-2xl font-medium text-indigo-500 border-b pb-3">My Profile</h2>
+      <div class="py-6">
+        <form *ngIf="form" (ngSubmit)="onSubmit()" [formGroup]="form">
+          <app-input
+            [control]="form.get('name')"
+            label="Name"
+            inputType="text">
+          </app-input>
+          <div class="grid grid-cols-2 gap-6 mb-3">
+            <div class="space-y-1 mb-3">
+              <label class="text-sm font-bold">Sex</label>
+              <ng-select
+                formControlName="sex"
+                appearance="outline"
+                [searchable]="false"
+                [clearable]="false"
+                placeholder="Sex"
+                class="rounded-sm border w-full"
+              >
+                <ng-option value="Male">
+                  Male
+                </ng-option>
+                <ng-option value="Female">
+                  Female
+                </ng-option>
+              </ng-select>
+            </div>
+            <div class="mb-3 space-y-1">
+              <label class="text-sm font-bold">Email</label>
+              <input
+                disabled
+                type="text"
+                [value]="profile.email"
+                autofocus
+                class="w-full focus:outline-none py-3 px-4 border rounded-sm text-xs"
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-6 mb-3">
+            <div class="space-y-1 mb-3">
+              <label class="text-sm font-bold">Job Position</label>
+              <ng-container *ngIf="vmJobPositions$ | async as vmJobPositions">
+                <ng-select
+                  formControlName="jobPositionSlug"
+                  appearance="outline"
+                  [searchable]="false"
+                  [clearable]="false"
+                  placeholder="Job Position"
+                  class="rounded-sm border w-full"
+                >
+                  <ng-option *ngFor="let jobPosition of vmJobPositions.jobPosition" [value]="jobPosition.slug">
+                    {{ jobPosition.name }}
+                  </ng-option>
+                </ng-select>
+              </ng-container>
+            </div>
+            <div class="space-y-1 mb-3">
+              <label class="text-sm font-bold">City</label>
+              <ng-container *ngIf="vmCity$ | async as vmCity">
+                <ng-select
+                  formControlName="citySlug"
+                  appearance="outline"
+                  [searchable]="false"
+                  [clearable]="false"
+                  placeholder="City"
+                  class="rounded-sm border w-full"
+                >
+                  <ng-option *ngFor="let city of vmCity.cities" [value]="city.slug">
+                    {{ city.name }}
+                  </ng-option>
+                </ng-select>
+              </ng-container>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-6 mb-3">
+            <div class="space-y-1 mb-3">
+              <label class="text-sm font-bold">Job Type</label>
+              <ng-container *ngIf="vmJobTypes$ | async as vmJobTypes">
+                <ng-select
+                  formControlName="jobTypeSlug"
+                  appearance="outline"
+                  [searchable]="false"
+                  [clearable]="false"
+                  placeholder="Job Type"
+                  class="rounded-sm border w-full"
+                >
+                  <ng-option
+                    *ngFor="let jobType of vmJobTypes.jobTypes"
+                    [value]="jobType.slug"
+                  >
+                    {{ jobType.name }}
+                  </ng-option>
+                </ng-select>
+              </ng-container>
+            </div>
+            <div class="space-y-1 mb-3">
+              <label class="text-sm font-bold">Job Sector</label>
+              <ng-container *ngIf="vmJobSectors$ | async as vmJobSectors">
+                <ng-select
+                  formControlName="jobSectorSlug"
+                  appearance="outline"
+                  [searchable]="false"
+                  [clearable]="false"
+                  placeholder="Job Sector"
+                  class="rounded-sm border w-full"
+                >
+                  <ng-option
+                    *ngFor="let jobSector of vmJobSectors.jobSectors"
+                    [value]="jobSector.slug">
+                    {{ jobSector.name }}
+                  </ng-option>
+                </ng-select>
+              </ng-container>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-6 mb-3">
+            <app-input
+              [control]="form.get('birthDay')"
+              label="Birth Day"
+              inputType="date">
+            </app-input>
+            <app-input
+              [control]="form.get('phone')"
+              label="Phone"
+              inputType="text">
+            </app-input>
+          </div>
+          <app-input
+            [control]="form.get('address')"
+            label="Address"
+            inputType="text">
+          </app-input>
+          <div class="space-y-1 mb-3">
+            <label class="text-sm font-bold">Description</label>
+            <textarea
+              formControlName="description"
+              rows="4"
+              placeholder="Description"
+              class="focus:outline-none py-3 px-4 w-full border text-xs rounded-sm">
+        </textarea>
+          </div>
+          <app-button
+            [disabled]="this.form.invalid"
+            type="submit"
+          >
+            Save
+          </app-button>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>

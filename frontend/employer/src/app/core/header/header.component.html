@@ -1,0 +1,95 @@
+<header class="shadow border-b">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="uppercase text-2xl font-bold"><span class="text-indigo-500">Ute</span> Recruitment</h1>
+    <nav>
+      <ul class="flex space-x-2">
+        <li>
+          <a
+            routerLink="/company"
+            routerLinkActive="text-indigo-500 border-indigo-500"
+            [routerLinkActiveOptions]="{exact: true}"
+            class="inline-block py-6 px-4 text-gray-900 font-medium capitalize border-b-2 border-transparent hover:text-indigo-500 hover:border-indigo-500">
+            My Company
+          </a>
+        </li>
+        <ng-template [ngIf]="isLogged">
+          <li>
+            <a
+              routerLink="/resumes"
+              routerLinkActive="text-indigo-500 border-indigo-500"
+              class="inline-block py-6 px-4 text-gray-900 font-medium capitalize border-b-2 border-transparent hover:text-indigo-500 hover:border-indigo-500">
+              Manager Resumes
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/find-candidates"
+              routerLinkActive="text-indigo-500 border-indigo-500"
+              class="inline-block py-6 px-4 text-gray-900 font-medium capitalize border-b-2 border-transparent hover:text-indigo-500 hover:border-indigo-500">
+              Find candidates
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/jobs"
+              routerLinkActive="text-indigo-500 border-indigo-500"
+              class="inline-block py-6 px-4 text-gray-900 font-medium capitalize border-b-2 border-transparent hover:text-indigo-500 hover:border-indigo-500">
+              Jobs Recruitment
+            </a>
+          </li>
+        </ng-template>
+        <li *ngIf="!isLogged">
+          <a
+            routerLink="/services"
+            routerLinkActive="text-indigo-500 border-indigo-500"
+            class="inline-block py-6 px-4 text-gray-900 font-medium capitalize border-b-2 border-transparent hover:text-indigo-500 hover:border-indigo-500">
+            Services
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/packages"
+            routerLinkActive="text-indigo-500 border-indigo-500"
+            class="inline-block py-6 px-4 text-gray-900 font-medium capitalize border-b-2 border-transparent hover:text-indigo-500 hover:border-indigo-500">
+            Packages
+          </a>
+        </li>
+        <ng-template [ngIf]="!isLogged">
+          <li>
+            <a
+              routerLink="/login"
+              routerLinkActive="text-indigo-500 border-indigo-500"
+              class="inline-block py-6 px-4 text-gray-900 font-medium capitalize border-b-2 border-transparent hover:text-indigo-500 hover:border-indigo-500">
+              Login
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/register"
+              routerLinkActive="text-indigo-500 border-indigo-500"
+              class="inline-block py-6 px-4 text-gray-900 font-medium capitalize border-b-2 border-transparent hover:text-indigo-500 hover:border-indigo-500">
+              Register
+            </a>
+          </li>
+        </ng-template>
+        <li *ngIf="isLogged">
+          <button class="focus:outline-none py-6 px-4 text-gray-900 font-medium hover:text-indigo-500 flex items-center">
+            Account
+            <svg
+              class="w-3 h-3 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2" d="M19 9l-7 7-7-7">
+              </path>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

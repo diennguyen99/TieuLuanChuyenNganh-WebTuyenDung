@@ -1,0 +1,38 @@
+<form *ngIf="form" [formGroup]="form">
+  <app-input
+    label="Your Name"
+    placeholder="Your Name"
+    [control]="form.get('name')">
+  </app-input>
+  <app-input
+    label="Your Email"
+    placeholder="Your Email"
+    [control]="form.get('email')">
+  </app-input>
+  <div class="mb-3 grid grid-cols-2 gap-6">
+    <label class="space-x-3">
+      <span class="text-sm font-bold">My CV</span>
+      <input formControlName="myCvOnline" type="checkbox" />
+    </label>
+    <label *ngIf="!form.get('myCvOnline').value" class="space-y-1">
+      <span class="text-sm font-bold">Upload CV</span>
+      <input formControlName="file" type="file" accept=".doc,.docx" />
+    </label>
+  </div>
+  <div class="description">
+    <label class="space-y-1">
+      <span class="text-sm font-bold">
+        What skills, work projects or achievements make you a strong candidate?
+      </span>
+      <textarea
+        formControlName="content"
+        rows="5"
+        class="focus:outline-none px-4 py-3 border w-full text-xs"></textarea>
+    </label>
+  </div>
+  <button [disabled]="form.invalid"
+          (click)="onSubmit()"
+          class="mt-6 w-full rounded py-2 text-white bg-indigo-500 border border-indigo-500">
+    Send my CV
+  </button>
+</form>

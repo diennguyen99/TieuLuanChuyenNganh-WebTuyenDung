@@ -1,0 +1,153 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <span *ngIf="vm.loading; else done">Loading</span>
+  <ng-template #done>
+    <div class="bg-gray-100">
+      <div class="pt-8 max-w-6xl mx-auto">
+        <div class="border shadow">
+          <div class="relative h-64 w-full">
+            <!-- ========== Edit Thumbnail =========== -->
+            <div
+              (click)="openModalAddThumbnail(vm.company.id)"
+              class="cursor-pointer absolute z-10 right-0 bottom-0 p-4 bg-black rounded-tl"
+            >
+              <button class="focus:outline-none flex items-center text-white">
+                Edit Thumbnail
+                <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+              </button>
+            </div>
+
+            <!-- ========== Thumbnail =========== -->
+            <img
+              class="h-full w-full"
+              [src]="vm.company.thumbnail"
+              alt=""
+            >
+
+            <!-- ========== Name Company =========== -->
+            <div class="pl-72 pr-12 py-6 absolute w-full bg-white">
+              <div
+                *ngIf="vm.company.name"
+                class="flex items-center space-x-6"
+              >
+                <h1
+                  class="uppercase font-bold text-indigo-500 text-4xl"
+                >
+                  {{ vm.company.name }}
+                </h1>
+                <svg (click)="openModalUpdateCompany(vm.company)" class="w-8 h-8 cursor-pointer text-green-500 hover:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+              </div>
+              <button
+                *ngIf="!vm.company.name"
+                (click)="openModalUpdateCompany(vm.company)"
+                class="focus:outline-none font-light text-red-500 text-xl flex items-center"
+              >
+                <svg class="w-6 h-6 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                Click Update Information
+              </button>
+            </div>
+
+            <!-- ========== Logo =========== -->
+            <div
+              (click)="openModalAddLogo(vm.company.id)"
+              class="absolute -bottom-28 left-12 shadow border bg-white cursor-pointer"
+            >
+              <img class="w-48 h-48 mx-auto" [src]="vm.company.logo" alt="logo">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="vm.company.name" class="mt-24 py-16 bg-gray-100">
+        <!-- ========= Introduce ========== -->
+        <div class="container mx-auto">
+          <h2 class="pb-5 border-gray-600 max-w-sm mx-auto text-center border-b text-3xl font-bold">
+            Introduce
+          </h2>
+          <div [innerHTML]="vm.company.description"
+               class="py-6 max-w-3xl mx-auto text-gray-900 text-justify space-y-3 text-sm">
+          </div>
+        </div>
+
+        <!-- ========= Information ========== -->
+        <div class="mt-12 bg-white max-w-4xl mx-auto shadow rounded">
+          <div class="grid grid-cols-3 divide-x">
+            <div class="py-6 text-center">
+              <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <h3 class="mt-3 mb-1 uppercase text-gray-900 text-xl">FOUNDED YEAR</h3>
+              <time class="text-4xl text-indigo-500 font-bold">{{ vm.company.foundedYear }}</time>
+            </div>
+            <div class="py-6 text-center">
+              <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+              <h3 class="mt-3 mb-1 uppercase text-gray-900 text-xl">COMPANY SIZE</h3>
+              <time class="text-4xl text-indigo-500 font-bold">{{ vm.company.companySize}}</time>
+            </div>
+            <div class="py-6 text-center">
+              <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path></svg>
+              <h3 class="mt-3 mb-1 uppercase text-gray-900 text-xl">AVERAGE AGE</h3>
+              <time class="text-4xl text-indigo-500 font-bold">{{ vm.company.averageAge }}</time>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= Social Network ========== -->
+        <div class="mt-12 py-6">
+          <h2 class="pb-5 border-gray-600 max-w-sm mx-auto text-center border-b text-3xl font-bold">
+            Social Network
+          </h2>
+          <div class="mt-12 max-w-xl mx-auto h-48 bg-white shadow rounded">
+            <div class="h-full grid grid-cols-2 divide-x">
+              <div class="py-6 h-full text-center">
+                <a [href]="vm.company.website"
+                   target="_blank"
+                   class="text-xl">
+                  Website
+                  <img
+                    src="./assets/world-wide-web.png"
+                    alt="website"
+                    class="mt-4 w-24 mx-auto"
+                  >
+                </a>
+              </div>
+              <div class="py-6 h-full text-center">
+                <a [href]="vm.company.facebook"
+                   target="_blank"
+                   class="text-xl">
+                  Facebook
+                  <img
+                    src="./assets/facebook.png"
+                    alt="website"
+                    class="mt-4 w-24 mx-auto"
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= Contact ========== -->
+        <div class="py-12 px-6">
+          <h2 class="pb-5 border-gray-600 max-w-sm mx-auto text-center border-b text-3xl font-bold">
+            Contact
+          </h2>
+          <div class="mt-6 py-6 rounded shadow bg-white max-w-xl mx-auto">
+            <div class="p-6 space-y-2">
+              <a
+                [href]="'tel:' + vm.company.phone"
+                class="flex items-center text-sm hover:underline hover:text-indigo-500">
+                <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                <span>{{ vm.company.phone }}</span>
+              </a>
+              <a
+                [href]="'http://maps.google.com/?q=1200 ' + vm.company.address"
+                target="_blank"
+                class="flex items-center text-sm hover:underline hover:text-indigo-500">
+                <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <span>{{ vm.company.address }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>

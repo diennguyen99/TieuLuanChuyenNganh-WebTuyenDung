@@ -1,0 +1,90 @@
+query jobs($input: JobsByCandidateInput!) {
+  jobsByCandidate(input: $input) {
+    ok
+    error
+    totalPages
+    totalResults
+    jobs {
+      id
+      name
+      salaryType
+      salaryMin
+      salaryMax
+      city {
+        name
+        slug
+      }
+      jobPosition {
+        name
+        slug
+      }
+      jobType {
+        name
+        slug
+      }
+      jobSector {
+        name
+        slug
+      }
+      address
+      description
+      promotedUntil
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+query job($input: JobInput!) {
+  job(input: $input) {
+    ok
+    error
+    job {
+      id
+      name
+      salaryType
+      salaryMin
+      salaryMax
+      city {
+        name
+        slug
+      }
+      jobPosition {
+        name
+        slug
+      }
+      jobType {
+        name
+        slug
+      }
+      jobSector {
+        name
+        slug
+      }
+      address
+      description
+    }
+  }
+}
+
+mutation createJob($input: CreateJobInput!) {
+  createJob(input: $input) {
+    ok
+    jobId
+    error
+  }
+}
+
+mutation editJob($input: EditJobInput!) {
+  editJob(input: $input) {
+    ok
+    error
+  }
+}
+
+mutation deleteJob($input: DeleteJobInput!) {
+  deleteJob(input: $input){
+    ok
+    error
+  }
+}

@@ -1,0 +1,9 @@
+::ng-deep .job-content {
+  h2 {
+    @apply my-5 text-3xl font-medium;
+  }
+
+  ul {
+    @apply mb-5 list-disc list-inside;
+  }
+}

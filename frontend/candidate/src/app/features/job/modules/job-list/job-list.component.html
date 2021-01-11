@@ -1,0 +1,114 @@
+<div class="pb-12">
+  <!-- ======== Search ======== -->
+  <div style="background-image: url('./assets/banner-bg.jpg')"
+       class="h-40 mb-12 relative bg-cover">
+    <div class="absolute z-10 inset-0 bg-black opacity-50"></div>
+    <div class="absolute z-30 inset-x-0">
+      <app-search-job-form [params]="params"></app-search-job-form>
+    </div>
+  </div>
+
+  <!-- ======= list ======= -->
+  <div class="container mx-auto">
+    <div class="grid grid-cols-5 gap-6">
+      <div class="col-span-1 space-y-3">
+        <div class="bg-white border">
+          <h4 class="px-4 py-2 bg-indigo-500 text-white text-base">
+            Job Type
+          </h4>
+          <ng-container *ngIf="jobTypeVm$ | async as jobTypeVm">
+            <span *ngIf="jobTypeVm.loading; else done">Loading...</span>
+            <ng-template #done>
+              <ul class="p-4 space-y-1">
+                <li *ngFor="let jobType of jobTypeVm.jobTypes">
+                  <label
+                    class="space-x-2 cursor-pointer flex items-center">
+                    <input type="radio"
+                           name="jobType"
+                           (click)="onChangeJobType(jobType.slug)"
+                           [value]="jobType.slug"/>
+                    <span class="text-gray-500">{{ jobType.name }}</span>
+                  </label>
+                </li>
+              </ul>
+            </ng-template>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-span-4">
+        <ng-container *ngIf="vm$ | async as vm">
+            <span *ngIf="vm.loading; else done">Loading...</span>
+            <ng-template #done>
+              <div class="mb-4 py-4 px-6 bg-white">
+                <p class="font-bold text-xl">
+                  {{ vm.totalResults }} Jobs Found
+                </p>
+                <span *ngIf="vm.totalResults > 0" class="text-gray-600 font-bold">
+                  Displayed Here:
+                  {{ (currentPage - 1) * pageSize(vm.totalPages, vm.totalResults) + 1 }} -
+                  {{ currentPage * pageSize(vm.totalPages, vm.totalResults) }} Jobs
+                </span>
+              </div>
+              <ul class="space-y-4">
+                <li *ngFor="let job of vm.results" class="bg-white border">
+                  <div class="p-6">
+                    <div class="space-x-6 flex items-center justify-between">
+                      <figure class="w-24 h-24">
+                        <div class="h-full border flex items-center justify-center">
+                          <img [src]="job.company.logo" [alt]="job.company.name">
+                        </div>
+                      </figure>
+                      <div class="h-24 flex-1">
+                        <a [routerLink]="['/jobs', job.slug]">
+                          <h2 class="text-xl font-bold leading-none hover:text-indigo-500">
+                            {{ job.name }}
+                          </h2>
+                        </a>
+                        <div class="space-x-2 flex items-center">
+                          <a routerLink="/companies/1"
+                             class="text-xs text-indigo-500 hover:underline">
+                            <span class="mr-1 text-sm">@</span>
+                            {{ job.company.name }}
+                          </a>
+                          <span class="text-xl text-gray-400 capitalize font-light">|</span>
+                          <span class="text-xs flex items-center text-gray-600 capitalize">
+                          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            {{ job.city.name }}
+                          </span>
+                        </div>
+                        <span class="flex items-center text-xs capitalize">
+                          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                          {{ job.jobPosition.name }}
+                        </span>
+                        <div class="mt-2 space-x-2 flex items-center">
+                          <span class="text-xs flex items-center text-gray-600">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Published {{ job.updatedAt | timeAgo }}
+                          </span>
+                          <span class="text-xl text-gray-400 font-light">|</span>
+                          <span class="text-xs flex items-center text-gray-600 capitalize">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                                {{ job.jobSector.name }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="py-1 px-6 bg-indigo-500">
+                        <span class="uppercase text-white font-medium">{{ job.jobType.name }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="mt-4 float-right">
+                <nz-pagination [(nzPageIndex)]="currentPage"
+                               (nzPageIndexChange)="onChangeCurrentPage()"
+                               [nzPageSize]="pageSize(vm.totalPages, vm.totalResults)"
+                               [nzTotal]="vm.totalResults">
+                </nz-pagination>
+              </div>
+            </ng-template>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

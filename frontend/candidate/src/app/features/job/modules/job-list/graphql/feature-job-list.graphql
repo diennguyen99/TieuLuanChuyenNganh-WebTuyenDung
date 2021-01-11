@@ -1,0 +1,31 @@
+query filterJob(
+  $input: SearchJobsInput!
+) {
+  searchJobs(input: $input) {
+    ok
+    error
+    totalPages
+    totalResults
+    jobs {
+      slug
+      name
+      company {
+        logo
+        name
+      }
+      city {
+        name
+      }
+      jobPosition {
+        name
+      }
+      jobType {
+        name
+      }
+      jobSector {
+        name
+      }
+      updatedAt
+    }
+  }
+}
